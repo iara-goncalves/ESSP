@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.pyplot import errorbar
 from astropy.timeseries import LombScargle
+from scipy.signal import find_peaks
 from scipy.signal import lombscargle
 
 # Specify where all the data set folders are
@@ -94,7 +95,9 @@ for ds, g in df_all.groupby("Dataset"):
 # Quick summary
 n_out = df_all["is_outlier"].sum()
 print(f"Outliers flagged (but kept): {n_out}  ({n_out/len(df_all)*100:.2f}%)")
-# df_all[df_all["is_outlier"]]
+df_all[df_all["is_outlier"]]
+
+#### Dataset files for job submissions ########
 
 # Choose which dataframe to export
 if exclude_outliers_when_writing:
@@ -434,7 +437,7 @@ def plot_activity_with_periodograms(ds, ds_df, fig_dir):
                         power_threshold = np.percentile(power, 90)  # Top 10% of power values
                         
                         # Convert minimum period separation to frequency space
-                        min_period_separation = 0.1  # minimum separation in log10(period) space
+                        min_period_separation = 0.01  # minimum separation in log10(period) space
                         # This corresponds to roughly 25% difference in period
                         min_freq_separation = int(len(freq) * min_period_separation / np.log10(f_max/f_min))
                         
