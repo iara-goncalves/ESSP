@@ -97,7 +97,7 @@ n_out = df_all["is_outlier"].sum()
 print(f"Outliers flagged (but kept): {n_out}  ({n_out/len(df_all)*100:.2f}%)")
 df_all[df_all["is_outlier"]]
 
-#### Dataset files for job submissions ########
+########## Dataset files for job submissions ############
 
 # Choose which dataframe to export
 if exclude_outliers_when_writing:
@@ -115,7 +115,6 @@ for ds, subdf in df_export.groupby("Dataset"):
     # Get instruments present in this dataset
     instruments = sorted(subdf["Instrument"].unique())
     instrument_map = {inst: i for i, inst in enumerate(instruments)}
-
     
     # Columns
     time = subdf["Time [eMJD]"].values
@@ -133,11 +132,12 @@ for ds, subdf in df_export.groupby("Dataset"):
     np.savetxt(outfile, data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
 
 
-###### BIS and FWHM ######
+###### Activity indicators ######
 
 # Empirical errors
 bis_err_val = 0.95      # m/s
 fwhm_err_val = 5.0    # m/s
+contrast_err_val = 130
 halpha_err_val = 0.001  # 1/s
 ca2_err_val = 0.003  # 1/s
 
@@ -154,7 +154,7 @@ for ds, subdf in df_export.groupby("Dataset"):
     # BIS
     # =====================
     bis = subdf["BIS [m/s]"].values
-    bis_err = np.full(len(subdf), bis_err_val)   # constant error
+    bis_err = np.full(len(subdf), bis_err_val) # constant error
     jitter_flag = np.zeros(len(subdf), dtype=int)
     offset_flag = subdf["Instrument"].map(instrument_map).astype(int).values
     subset_flag = -1 * np.ones(len(subdf), dtype=int)
@@ -162,6 +162,19 @@ for ds, subdf in df_export.groupby("Dataset"):
     bis_data = np.column_stack([time, bis, bis_err, jitter_flag, offset_flag, subset_flag])
     bis_outfile = os.path.join(outdir, f"{ds}_BIS.dat")
     np.savetxt(bis_outfile, bis_data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
+
+    # =====================
+    # CCF Contrast
+    # =====================
+    contrast = subdf["CCF Contrast"].values
+    contrast_err = np.full(len(subdf), contrast_err_val)
+    jitter_flag = np.zeros(len(subdf), dtype=int)
+    offset_flag = subdf["Instrument"].map(instrument_map).astype(int).values
+    subset_flag = -1 * np.ones(len(subdf), dtype=int)
+
+    contrast_data = np.column_stack([time, contrast, contrast_err, jitter_flag, offset_flag, subset_flag])
+    contrast_outfile = os.path.join(outdir, f"{ds}_Contrast.dat")
+    np.savetxt(contrast_outfile, contrast_data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
 
     # =====================
     # FWHM
