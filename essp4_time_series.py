@@ -85,7 +85,7 @@ for ds, g in df_all.groupby("Dataset"):
         if std == 0 or np.isnan(std):
             continue
             
-        # Points beyond sigma_threshold - ACCUMULATE outliers (use |= instead of =)
+        # Points beyond sigma_threshold - ACCUMULATE outliers
         col_outliers = (np.abs(g[col] - median) > (sigma_threshold * std))
         out_mask |= col_outliers.fillna(False)  # Handle NaN values
 
