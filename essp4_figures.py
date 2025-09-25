@@ -5,73 +5,92 @@ import pandas as pd
 from astropy.timeseries import LombScargle
 from scipy.signal import find_peaks
 
-def load_processed_data(data_dir):
-    """Load the processed dataframe from essp4_data.py"""
-    pkl_path = os.path.join(data_dir, "processed_data.pkl")
-    if not os.path.exists(pkl_path):
-        raise FileNotFoundError(f"Processed data not found at {pkl_path}. Run essp4_data.py first.")
+def load_dat_files(data_dir):
+    """Load data directly from .dat files created by essp4_data.py"""
     
-    df_all = pd.read_pickle(pkl_path)
-    print(f"Loaded processed data: {len(df_all)} total points")
-    print(f"Outliers: {df_all['is_outlier'].sum()} ({df_all['is_outlier'].sum()/len(df_all)*100:.2f}%)")
+    all_data = []
     
-    return df_all
-
-def compute_periodogram(t, y, dy, min_period=1.1, max_period_factor=0.8):
-    """Compute Lomb-Scargle periodogram and find significant peaks."""
+    # Look for all DS*.dat files
+    dat_files = [f for f in os.listdir(data_dir) if f.startswith('DS') and f.endswith('.dat')]
+    dat_files.sort()
     
-    if len(t) <= 5:
-        return None, None, []
+    if not dat_files:
+        raise FileNotFoundError(f"No DS*.dat files found in {data_dir}")
     
-    # Fix non-positive errors
-    m = dy > 0
-    if not m.all():
-        repl = np.median(dy[m]) if m.any() else 1.0
-        dy[~m] = repl
+    # Group files by dataset
+    dataset_files = {}
+    for filename in dat_files:
+        ds_name = filename.split('_')[0]  # DS1, DS2, etc.
+        if ds_name not in dataset_files:
+            dataset_files[ds_name] = []
+        dataset_files[ds_name].append(filename)
     
-    span = t.max() - t.min()
-    if span <= 1:
-        return None, None, []
-    
-    # Define frequency range
-    max_period = max(2.0, max_period_factor * span)
-    f_min = 1.0 / max_period
-    f_max = 1.0 / min_period
-    
-    # Create Lomb-Scargle object and compute periodogram
-    ls = LombScargle(t, y, dy)
-    freq, power = ls.autopower(minimum_frequency=f_min, maximum_frequency=f_max, samples_per_peak=5)
-    
-    # Use simple power threshold instead of FAP
-    power_threshold = np.percentile(power, 90)  # Top 10% threshold
-    min_freq_separation = max(1, int(len(freq) * 0.01))
-    
-    peak_indices, _ = find_peaks(
-        power, 
-        height=power_threshold,
-        distance=min_freq_separation,
-        prominence=power_threshold * 0.1
-    )
-    
-    # Get top 3 peaks by power
-    peaks = []
-    if len(peak_indices) > 0:
-        peak_powers = power[peak_indices]
-        sorted_order = np.argsort(peak_powers)[::-1]
+    # Process each dataset
+    for ds_name in sorted(dataset_files.keys()):
+        print(f"Processing {ds_name}...")
+        ds_data = None
         
-        for i in sorted_order[:3]:
-            idx = peak_indices[i]
-            peaks.append({
-                'period': 1.0 / freq[idx],
-                'power': power[idx],
-                'freq': freq[idx]
-            })
+        for filename in sorted(dataset_files[ds_name]):
+            filepath = os.path.join(data_dir, filename)
+            measurement_type = filename.split('_')[1].replace('.dat', '')
+            
+            try:
+                # Read: time, value, error, jitter_flag, offset_flag, subset_flag
+                data = np.loadtxt(filepath)
+                
+                # Create base DataFrame
+                df = pd.DataFrame({
+                    'Time [eMJD]': data[:, 0],
+                    'offset_flag': data[:, 4].astype(int),
+                    'Dataset': ds_name
+                })
+                
+                # Add measurement-specific columns
+                if measurement_type == 'RV':
+                    df['RV [m/s]'] = data[:, 1]
+                    df['RV Err. [m/s]'] = data[:, 2]
+                elif measurement_type == 'BIS':
+                    df['BIS [m/s]'] = data[:, 1]
+                    df['BIS Err. [m/s]'] = data[:, 2]
+                elif measurement_type == 'FWHM':
+                    df['CCF FWHM [m/s]'] = data[:, 1]
+                    df['CCF FWHM Err. [m/s]'] = data[:, 2]
+                elif measurement_type == 'Contrast':
+                    df['CCF Contrast'] = data[:, 1]
+                    df['CCF Contrast Err.'] = data[:, 2]
+                elif measurement_type == 'Halpha':
+                    df['H-alpha Emission'] = data[:, 1]
+                    df['H-alpha Err.'] = data[:, 2]
+                elif measurement_type == 'CaII':
+                    df['CaII Emission'] = data[:, 1]
+                    df['CaII Err.'] = data[:, 2]
+                
+                # Map offset_flag to instrument names
+                instrument_map = {0: 'expres', 1: 'harps', 2: 'harpsn', 3: 'neid'}
+                df['Instrument'] = df['offset_flag'].map(instrument_map).fillna('unknown')
+                
+                # Merge with existing dataset data
+                if ds_data is None:
+                    ds_data = df
+                else:
+                    ds_data = pd.merge(ds_data, df, on=['Time [eMJD]', 'offset_flag', 'Dataset', 'Instrument'], how='outer')
+                
+            except Exception as e:
+                print(f"  Error loading {filepath}: {e}")
+                continue
+        
+        if ds_data is not None:
+            all_data.append(ds_data)
+            print(f"  Loaded {len(ds_data)} points")
     
-    return freq, power, peaks
+    # Combine all datasets
+    df_all = pd.concat(all_data, ignore_index=True)
+    print(f"\nTotal: {len(df_all)} points from {len(all_data)} datasets")
+    return df_all
 
 def plot_activity_with_periodograms(ds, ds_df, fig_dir):
     """
-    Plot activity indicators with Lomb-Scargle periodograms using only inliers.
+    Plot activity indicators with Lomb-Scargle periodograms.
     Left column: Activity data, Right column: Periodograms
     """
     fig, axes = plt.subplots(6, 2, figsize=(18, 18))
@@ -86,111 +105,76 @@ def plot_activity_with_periodograms(ds, ds_df, fig_dir):
         ("CaII Emission", 0.003, "CaII Emission"),
     ]
     
-    # Use only inliers
-    inliers = ds_df[~ds_df.is_outlier].copy()
-    
     # Get all unique instruments and assign colors
-    all_instruments = sorted(inliers["Instrument"].unique()) if not inliers.empty else []
-    colors = plt.cm.tab10(np.linspace(0, 1, max(1, len(all_instruments))))
+    all_instruments = sorted(ds_df["Instrument"].unique())
+    colors = plt.cm.tab10(np.linspace(0, 1, len(all_instruments)))
     color_map = dict(zip(all_instruments, colors))
     
     for i, (col, yerr, ylabel) in enumerate(plot_info):
         ax_data = axes[i, 0]      # Left column for data
         ax_period = axes[i, 1]    # Right column for periodogram
         
-        if col not in inliers.columns or inliers.empty:
-            ax_data.text(0.5, 0.5, f"Column '{col}' not found or no inliers", 
+        if col not in ds_df.columns:
+            ax_data.text(0.5, 0.5, f"Column '{col}' not found", 
                         ha='center', va='center', transform=ax_data.transAxes)
             ax_period.text(0.5, 0.5, f"No data for '{col}'", 
                           ha='center', va='center', transform=ax_period.transAxes)
             ax_data.set_ylabel(ylabel)
-            ax_period.set_ylabel("LS Power")
             continue
         
         # === LEFT SIDE: DATA PLOT ===
-        try:
-            # Calculate instrument-specific medians for centering
-            inst_medians = inliers.groupby("Instrument")[col].median()
+        # Calculate instrument-specific medians for centering
+        inst_medians = ds_df.groupby("Instrument")[col].median()
+        
+        # Plot each instrument
+        for inst in all_instruments:
+            inst_data = ds_df[ds_df["Instrument"] == inst]
+            if inst_data.empty:
+                continue
+                
+            # Center data by instrument median
+            center = inst_medians[inst]
+            y_centered = inst_data[col] - center
             
-            # Plot each instrument
-            for inst in all_instruments:
-                inst_data = inliers[inliers["Instrument"] == inst]
-                if inst_data.empty:
-                    continue
-                    
-                # Center data by instrument median
-                center = inst_medians[inst]
-                y_centered = inst_data[col] - center
-                
-                # Remove any NaN values from the plotting data
-                time_vals = inst_data["Time [eMJD]"].values
-                y_vals = y_centered.values
-                
-                # Create mask for finite values
-                finite_mask = np.isfinite(time_vals) & np.isfinite(y_vals)
-                
-                if not np.any(finite_mask):
-                    continue
-                
-                time_clean = time_vals[finite_mask]
-                y_clean = y_vals[finite_mask]
-                
-                # Handle error bars - FIXED VERSION
-                if isinstance(yerr, str) and yerr in inst_data.columns:
-                    error_values = inst_data[yerr].values[finite_mask]  # Apply same mask
-                    # Ensure error values are positive and finite
-                    error_values = np.abs(error_values)
-                    error_values[~np.isfinite(error_values)] = np.nanmedian(error_values[np.isfinite(error_values)])
-                    if np.isnan(np.nanmedian(error_values)):  # If all errors are NaN
-                        error_values = np.full_like(error_values, 1.0)
-                else:
-                    error_values = np.full(len(time_clean), float(yerr))
-                
-                # Final check: ensure all arrays have the same length
-                min_len = min(len(time_clean), len(y_clean), len(error_values))
-                time_clean = time_clean[:min_len]
-                y_clean = y_clean[:min_len]
-                error_values = error_values[:min_len]
-                
-                # Plot with error bars
-                ax_data.errorbar(time_clean, y_clean, 
-                               yerr=error_values, fmt=".", 
-                               color=color_map[inst], label=inst, 
-                               alpha=0.8, markersize=6)
+            # Handle error bars
+            if isinstance(yerr, str) and yerr in inst_data.columns:
+                error_values = inst_data[yerr]
+            else:
+                error_values = yerr
             
-            ax_data.set_ylabel(f"{ylabel} - mean")
-            ax_data.grid(True, alpha=0.3)
-            
-        except Exception as e:
-            print(f"Error plotting {ds} - {col}: {str(e)}")
-            ax_data.text(0.5, 0.5, f"Plotting error:\n{str(e)[:50]}...", 
-                        ha='center', va='center', transform=ax_data.transAxes, fontsize=8)
+            ax_data.errorbar(inst_data["Time [eMJD]"], y_centered, 
+                           yerr=error_values, fmt=".", 
+                           color=color_map[inst], label=inst, 
+                           alpha=0.8, markersize=6)
+        
+        ax_data.set_ylabel(f"{ylabel} - mean")
+        ax_data.grid(True, alpha=0.3)
         
         # === RIGHT SIDE: LOMB-SCARGLE PERIODOGRAM ===
         try:
-            if not inliers.empty and col in inliers.columns:
-                # Prepare data for periodogram (all inliers, all instruments combined)
-                time_data = inliers["Time [eMJD]"].values
-                y_data = inliers[col].values
+            if not ds_df.empty and col in ds_df.columns:
+                # Prepare data for periodogram (all data, all instruments combined)
+                time_data = ds_df["Time [eMJD]"].values
+                y_data = ds_df[col].values
                 
                 # Handle error values
-                if isinstance(yerr, str) and yerr in inliers.columns:
-                    dy_data = inliers[yerr].values
-                    dy_data = np.abs(dy_data)  # Ensure positive
+                if isinstance(yerr, str) and yerr in ds_df.columns:
+                    dy_data = ds_df[yerr].values
                 else:
-                    dy_data = np.full_like(y_data, float(yerr))
+                    dy_data = np.full_like(y_data, yerr if isinstance(yerr, (int, float)) else 1.0)
                 
                 # Remove NaN values
-                mask = np.isfinite(time_data) & np.isfinite(y_data) & np.isfinite(dy_data)
+                mask = ~(np.isnan(time_data) | np.isnan(y_data) | np.isnan(dy_data))
                 t = time_data[mask]
                 y = y_data[mask]
                 dy = dy_data[mask]
                 
                 if len(t) > 5:  # Need sufficient points for periodogram
                     # Fix non-positive errors
-                    dy = np.abs(dy)  # Ensure positive
-                    dy[dy <= 0] = np.nanmedian(dy[dy > 0]) if np.any(dy > 0) else 1.0
-                    dy[~np.isfinite(dy)] = 1.0
+                    m = dy > 0
+                    if not m.all():
+                        repl = np.median(dy[m]) if m.any() else 1.0
+                        dy[~m] = repl
                     
                     span = t.max() - t.min()
                     if span > 1:  # Need reasonable time span
@@ -200,43 +184,124 @@ def plot_activity_with_periodograms(ds, ds_df, fig_dir):
                         f_min = 1.0 / max_period
                         f_max = 1.0 / min_period
                         
-                        # Create Lomb-Scargle object and compute periodogram
+                        # Create frequency grid
+                        N = 15000
+                        freq = np.linspace(f_min, f_max, N)
+                        
+                        # Compute Lomb-Scargle periodogram
                         ls = LombScargle(t, y, dy)
-                        freq, power = ls.autopower(minimum_frequency=f_min, maximum_frequency=f_max, samples_per_peak=5)
+                        power = ls.power(freq)
                         
-                        # Calculate FAP levels using baluev method
+                        # === FALSE ALARM PROBABILITY LEVELS (for reference lines) ===
+                        fap_levels = [0.001, 0.01, 0.1]  # 0.1%, 1%, 10%
+                        fap_colors = ['red', 'orange', 'green']
+                        fap_labels = ['0.1%', '1%', '10%']
+                        fap_powers = []
+                        
                         try:
-                            fap_levels = [0.1, 0.01, 0.001]  # 10%, 1%, 0.1%
-                            fap_powers = []
-                            
                             for fap in fap_levels:
-                                try:
-                                    fap_power = ls.false_alarm_level(fap, method='baluev')
-                                    fap_powers.append(fap_power)
-                                except Exception as fap_error:
-                                    print(f"Warning: Baluev FAP calculation failed for {fap}: {fap_error}")
-                                    # Fallback to percentile-based threshold
-                                    fap_power = np.percentile(power, (1-fap)*100)
-                                    fap_powers.append(fap_power)
+                                fap_power = ls.false_alarm_level(fap, method='baluev')
+                                fap_powers.append(fap_power)
+                            print(f"FAP reference levels for {ds}-{col}: 0.1%={fap_powers[0]:.3f}, 1%={fap_powers[1]:.3f}, 10%={fap_powers[2]:.3f}")
+                        except Exception as fap_error:
+                            print(f"Warning: Could not compute FAP levels for {ds} - {col}: {fap_error}")
+                            fap_powers = []
+                        
+                        # === PEAK DETECTION (Independent of FAP) ===
+                        # Use percentile-based threshold for peak detection
+                        power_threshold = np.percentile(power, 85)  # Detect peaks above 85th percentile
+                        max_power = np.max(power)
+                        
+                        # Ensure we don't miss the highest peak
+                        if power_threshold > 0.8 * max_power:
+                            power_threshold = 0.5 * max_power
+                        
+                        print(f"Peak detection threshold: {power_threshold:.4f} (max power: {max_power:.4f})")
+                        
+                        # Convert minimum period separation to frequency space
+                        min_period_separation = 0.01  # minimum separation in log10(period) space
+                        min_freq_separation = int(len(freq) * min_period_separation / np.log10(f_max/f_min))
+                        
+                        # Find peaks with simple threshold
+                        try:
+                            peak_indices, peak_properties = find_peaks(
+                                power, 
+                                height=float(power_threshold),
+                                distance=max(1, min_freq_separation),
+                                prominence=float(power_threshold) * 0.1
+                            )
                             
-                        except Exception as e:
-                            print(f"Warning: All FAP calculations failed: {e}")
-                            # Use percentile-based thresholds as fallback
-                            fap_levels = [0.1, 0.01, 0.001]
-                            fap_powers = [np.percentile(power, 90), np.percentile(power, 99), np.percentile(power, 99.9)]
+                            # If no peaks found, be more lenient
+                            if len(peak_indices) == 0:
+                                lower_threshold = np.percentile(power, 70)
+                                peak_indices, peak_properties = find_peaks(
+                                    power, 
+                                    height=float(lower_threshold),
+                                    distance=max(1, min_freq_separation),
+                                    prominence=float(lower_threshold) * 0.05
+                                )
+                                print(f"Using more lenient threshold: {lower_threshold:.4f}")
+                                
+                        except Exception as peak_error:
+                            print(f"Peak detection error in {ds} - {col}: {peak_error}")
+                            # Fallback: just find the maximum
+                            peak_indices = [np.argmax(power)] if len(power) > 0 else []
+                            peak_indices = np.array(peak_indices)
                         
-                        # Find peaks using the most stringent FAP level
-                        power_threshold = fap_powers[-1] if fap_powers else np.percentile(power, 99)
-                        min_freq_separation = max(1, int(len(freq) * 0.01))
+                        print(f"Found {len(peak_indices)} peaks")
                         
-                        # Find peaks
-                        from scipy.signal import find_peaks
-                        peak_indices, _ = find_peaks(
-                            power, 
-                            height=power_threshold,           # Minimum peak height
-                            distance=min_freq_separation,     # Minimum distance between peaks
-                            prominence=power_threshold * 0.1  # Peak must stand out from baseline
-                        )
+                        # === PROCESS DETECTED PEAKS ===
+                        if len(peak_indices) > 0:
+                            peak_periods = 1.0 / freq[peak_indices]
+                            peak_powers_raw = power[peak_indices]
+                            
+                            # Sort by power (highest first)
+                            sorted_indices = np.argsort(peak_powers_raw)[::-1]
+                            peak_periods = peak_periods[sorted_indices][:3]  # Top 3 peaks
+                            peak_powers_sorted = peak_powers_raw[sorted_indices][:3]
+                            
+                            # Calculate FAP for each detected peak
+                            peak_faps = []
+                            peak_significance = []
+                            
+                            for peak_power in peak_powers_sorted:
+                                try:
+                                    peak_fap = ls.false_alarm_probability(peak_power, method='baluev')
+                                    peak_faps.append(peak_fap)
+                                    
+                                    # Determine significance level
+                                    if len(fap_powers) >= 3:
+                                        if peak_power >= fap_powers[0]:  # 0.1% FAP
+                                            significance = "highly significant"
+                                        elif peak_power >= fap_powers[1]:  # 1% FAP
+                                            significance = "significant"
+                                        elif peak_power >= fap_powers[2]:  # 10% FAP
+                                            significance = "marginally significant"
+                                        else:
+                                            significance = "not significant"
+                                    else:
+                                        significance = "unknown"
+                                    peak_significance.append(significance)
+                                    
+                                except Exception as e:
+                                    print(f"Could not calculate FAP for peak: {e}")
+                                    peak_faps.append(np.nan)
+                                    peak_significance.append("unknown")
+                            
+                            print(f"Detected peaks:")
+                            for j, (period, power_val, fap, sig) in enumerate(zip(peak_periods, peak_powers_sorted, peak_faps, peak_significance)):
+                                ordinal = ['1st', '2nd', '3rd'][j]
+                                if not np.isnan(fap):
+                                    print(f"  {ordinal}: {period:.2f}d, Power={power_val:.4f}, FAP={fap:.2e} ({sig})")
+                                else:
+                                    print(f"  {ordinal}: {period:.2f}d, Power={power_val:.4f} (FAP unknown)")
+                                    
+                        else:
+                            peak_periods = []
+                            peak_powers_sorted = []
+                            peak_faps = []
+                            peak_significance = []
+                            print("No peaks detected")
                         
                         # Convert to periods for plotting
                         periods = 1.0 / freq
@@ -244,64 +309,66 @@ def plot_activity_with_periodograms(ds, ds_df, fig_dir):
                         # Plot periodogram
                         ax_period.semilogx(periods, power, 'k-', linewidth=1)
                         
-                        # Plot FAP levels
-                        fap_colors = ['lightcoral', 'orange', 'red']
-                        fap_labels = ['10%', '1%', '0.1%']
-                        
+                        # Plot FALSE ALARM PROBABILITY reference lines
                         for fap_power, fap_color, fap_label in zip(fap_powers, fap_colors, fap_labels):
                             ax_period.axhline(fap_power, color=fap_color, linestyle='--', 
-                                            linewidth=1.5, alpha=0.8, label=f'FAP {fap_label}')
+                                            alpha=0.7, linewidth=1.5, 
+                                            label=f'{fap_label} FAP')
                         
-                        # Plot significant peaks
-                        if len(peak_indices) > 0:
-                            peak_periods = 1.0 / freq[peak_indices]
-                            peak_powers = power[peak_indices]
-                            
-                            # Sort by power and take top 3
-                            sorted_indices = np.argsort(peak_powers)[::-1][:3]
-                            top_periods = peak_periods[sorted_indices]
-                            top_powers = peak_powers[sorted_indices]
-                            
-                            # Calculate FAP for each peak
-                            peak_colors = ['red', 'orange', 'purple']
-                            peak_styles = ['--', '-.', ':']
-                            
-                            for j, (peak_period, peak_power) in enumerate(zip(top_periods, top_powers)):
-                                if j < len(peak_colors):
-                                    try:
-                                        peak_fap = ls.false_alarm_probability(peak_power, method='baluev')
-                                    except:
-                                        # Estimate FAP based on power percentile
-                                        percentile = (power < peak_power).sum() / len(power) * 100
-                                        peak_fap = max(0.001, (100 - percentile) / 100)
-                                    
-                                    ordinal = ['1st', '2nd', '3rd'][j]
-                                    fap_str = f"{peak_fap:.1e}" if peak_fap < 0.001 else f"{peak_fap:.3f}"
-                                    
-                                    ax_period.axvline(peak_period, color=peak_colors[j], 
-                                                    ls=peak_styles[j], lw=2, 
-                                                    label=f'{ordinal}: {peak_period:.1f}d (FAP={fap_str})')
-                            
-                            print(f"{ds} - {col}: Found {len(peak_indices)} significant peaks")
-                        else:
-                            print(f"{ds} - {col}: No significant peaks found")
+                        # Plot detected peaks with their FAP values
+                        peak_colors = ['purple', 'blue', 'cyan']
+                        peak_styles = ['-', '--', ':']
+                        
+                        for j, (peak_period, peak_power, peak_fap, significance) in enumerate(zip(peak_periods, peak_powers_sorted, peak_faps, peak_significance)):
+                            if j < len(peak_colors):
+                                ordinal = ['1st', '2nd', '3rd'][j]
+                                if not np.isnan(peak_fap):
+                                    label = f'{ordinal}: {peak_period:.1f}d (FAP={peak_fap:.1e})'
+                                else:
+                                    label = f'{ordinal}: {peak_period:.1f}d'
+                                
+                                ax_period.axvline(peak_period, color=peak_colors[j], 
+                                                ls=peak_styles[j], lw=2, alpha=0.8,
+                                                label=label)
+                        
+                        # Add reference lines for common periods
+                        reference_periods = [1, 7, 14, 28, 100, 365]
+                        for ref_period in reference_periods:
+                            if min_period <= ref_period <= max_period:
+                                ax_period.axvline(ref_period, color='blue', alpha=0.3, 
+                                                linestyle=':', linewidth=1)
+                                # Add label at top of plot
+                                ax_period.text(ref_period, ax_period.get_ylim()[1]*0.85, 
+                                             f'{ref_period}d', rotation=90, ha='right', 
+                                             va='top', fontsize=8, alpha=0.6, color='blue')
                         
                         ax_period.set_xlabel("Period [days]")
                         ax_period.set_ylabel("LS Power")
                         ax_period.set_title(f"{ylabel} Periodogram", fontsize=10)
                         ax_period.grid(True, alpha=0.3)
                         
-                        # Add legend if there are peaks or FAP levels
-                        if len(peak_indices) > 0 or fap_powers:
-                            ax_period.legend(fontsize=7, loc='upper right')
+                        # Add legend (FAP lines + peaks)
+                        ax_period.legend(fontsize=7, loc='upper right')
                         
                         # Add statistics text
-                        stats_text = f'N={len(t)}\nSpan={span:.1f}d'
-                        ax_period.text(0.02, 0.02, stats_text, 
-                                     transform=ax_period.transAxes, fontsize=8, 
-                                     verticalalignment='bottom', alpha=0.9,
-                                     bbox=dict(boxstyle="round,pad=0.3", facecolor="white", 
-                                             alpha=0.8, edgecolor='gray', linewidth=0.5))
+                        if len(peak_periods) > 0:
+                            peak_info = []
+                            for j, (p, pow, fap) in enumerate(zip(peak_periods, peak_powers_sorted, peak_faps)):
+                                if not np.isnan(fap):
+                                    peak_info.append(f'Peak {j+1}: {p:.1f}d (FAP={fap:.1e})')
+                                else:
+                                    peak_info.append(f'Peak {j+1}: {p:.1f}d (P={pow:.3f})')
+                            peak_text = '\n'.join(peak_info)
+                            stats_text = f'N={len(t)} points\nSpan={span:.1f}d\n{peak_text}'
+                        else:
+                            stats_text = f'N={len(t)} points\nSpan={span:.1f}d\nNo significant peaks'
+                        
+                        # Position the statistics box
+                        ax_period.text(0.02, 0.75, stats_text, 
+                                     transform=ax_period.transAxes, fontsize=7, 
+                                     verticalalignment='top', alpha=0.9,
+                                     bbox=dict(boxstyle="round,pad=0.4", facecolor="white", 
+                                             alpha=0.9, edgecolor='gray', linewidth=0.5))
                         
                     else:
                         ax_period.text(0.5, 0.5, f"Insufficient time span\n({span:.1f} days)", 
@@ -314,35 +381,24 @@ def plot_activity_with_periodograms(ds, ds_df, fig_dir):
                              ha='center', va='center', transform=ax_period.transAxes)
                 
         except Exception as e:
-            ax_period.text(0.5, 0.5, f"Periodogram error:\n{str(e)[:30]}...", 
+            ax_period.text(0.5, 0.5, f"Error computing\nperiodogram:\n{str(e)[:50]}...", 
                          ha='center', va='center', transform=ax_period.transAxes, fontsize=8)
-            print(f"Error in periodogram {ds} - {col}: {str(e)}")
-        
-        # Set labels for periodogram subplot
-        if i == len(plot_info) - 1:  # Last row
-            ax_period.set_xlabel("Period [days]")
-        if ax_period.get_ylabel() == "":  # If not set due to error
-            ax_period.set_ylabel("LS Power")
+            print(f"Error in {ds} - {col}: {str(e)}")
     
     # Set x-labels for bottom row
     axes[-1, 0].set_xlabel("Time [eMJD]")
+    axes[-1, 1].set_xlabel("Period [days]")
     
     # Add legend to first data plot only
     if all_instruments:
-        try:
-            handles, labels = axes[0, 0].get_legend_handles_labels()
-            if handles:  # Only if there are actually handles
-                by_label = dict(zip(labels, handles))
-                axes[0, 0].legend(by_label.values(), by_label.keys(), loc="best", fontsize=8)
-        except Exception as e:
-            print(f"Warning: Could not add legend: {e}")
+        handles, labels = axes[0, 0].get_legend_handles_labels()
+        by_label = dict(zip(labels, handles))
+        axes[0, 0].legend(by_label.values(), by_label.keys(), loc="best", fontsize=8)
     
     # Set overall title
-    fig.suptitle(f"{ds} - Activity Indicators & Lomb-Scargle Periodograms (Inliers Only)", 
+    fig.suptitle(f"{ds} - Activity Indicators & Lomb-Scargle Periodograms", 
                  fontsize=16)
-    
-    # Use subplots_adjust instead of tight_layout to avoid the rendering issue
-    plt.subplots_adjust(left=0.08, bottom=0.06, right=0.95, top=0.94, wspace=0.25, hspace=0.35)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
     
     # Save figure
     fig_path = os.path.join(fig_dir, f"{ds}_activity_LS_periodograms.png")
@@ -350,25 +406,22 @@ def plot_activity_with_periodograms(ds, ds_df, fig_dir):
     plt.close(fig)
     print(f"Saved figure: {fig_path}")
 
-
 def main():
-    """Main function to create periodogram figures."""
+    """Main function"""
     
-    # Configuration
     data_dir = "/work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data"
     fig_dir = "/work2/lbuc/iara/GitHub/ESSP/Figures"
     
     os.makedirs(fig_dir, exist_ok=True)
     
-    # Load processed data
-    df_all = load_processed_data(data_dir)
+    # Load data and create plots
+    df_all = load_dat_files(data_dir)
     
-    # Create periodogram plots
-    print("Creating activity plots with periodograms using inliers only...")
+    print("Creating periodogram plots...")
     for ds, ds_df in df_all.groupby("Dataset"):
         plot_activity_with_periodograms(ds, ds_df, fig_dir)
     
-    print("\nAll figures saved successfully!")
+    print("Done!")
 
 if __name__ == "__main__":
     main()
