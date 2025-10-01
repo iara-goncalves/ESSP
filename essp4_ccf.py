@@ -13,36 +13,18 @@ def load_offsets(offset_file):
     
     if offset_file and os.path.exists(offset_file):
         try:
-            data = np.loadtxt(offset_file, delimiter=',', unpack=True, dtype=str)
-            offset_dict = dict(zip(*data))
-            return {key: float(val) for key, val in offset_dict.items()}
+            # Fixed syntax to match your working code
+            offset_dict = dict(zip(*np.loadtxt(offset_file, delimiter=',', unpack=True, dtype=str)))
+            offset_dict = {key: float(val) for key, val in offset_dict.items()}
+            print(f"Loaded offsets from {offset_file}:")
+            for key, val in offset_dict.items():
+                print(f"  {key}: {val:.1f} m/s")
+            return offset_dict
         except Exception as e:
-            print(f"Warning: Could not load offset file: {e}")
+            print(f"Warning: Could not load offset file {offset_file}: {e}")
     
     print("Using default offsets (all zeros)")
     return {inst: 0.0 for inst in instruments}
-
-
-def resample_ccf(file_name):
-    """Resample CCF data for HARPS compatibility"""
-    hdus = fits.open(file_name)
-    hdu_names = [hdu.name.lower() for hdu in hdus][1:]
-    ccf_dict = {}
-    
-    for key in hdu_names:
-        if key == 'echelle_orders':
-            data = hdus[key].data
-        elif 'obo' in key:
-            if 'rv' in key:
-                data = hdus[key].data
-            else:
-                data = hdus[key].data[:, ::2]
-        else:
-            data = hdus[key].data[::2]
-        ccf_dict[key] = data.copy()
-    
-    hdus.close()
-    return ccf_dict
 
 
 def shift_ccf(ccf_x, ccf_y, rv_shift):
@@ -66,7 +48,7 @@ def get_available_datasets(essp_dir):
     return sorted(datasets)
 
 
-def process_all_files_for_instrument(files, use_resampling=True):
+def process_all_files_for_instrument(files):
     """Process all files for an instrument and return combined data"""
     all_ccfs = []
     all_v_grids = []
@@ -74,17 +56,11 @@ def process_all_files_for_instrument(files, use_resampling=True):
     
     for file in files:
         try:
-            if use_resampling:
-                ccf_dict = resample_ccf(file)
-                v_grid = ccf_dict['v_grid']
-                ccf = ccf_dict['ccf']
-                obo_ccf = ccf_dict['obo_ccf']
-            else:
-                hdus = fits.open(file)
-                v_grid = hdus['v_grid'].data.copy()
-                ccf = hdus['ccf'].data.copy()
-                obo_ccf = hdus['obo_ccf'].data.copy()
-                hdus.close()
+            hdus = fits.open(file)
+            v_grid = hdus['v_grid'].data.copy()
+            ccf = hdus['ccf'].data.copy()
+            obo_ccf = hdus['obo_ccf'].data.copy()
+            hdus.close()
             
             all_ccfs.append(ccf)
             all_v_grids.append(v_grid)
@@ -97,12 +73,12 @@ def process_all_files_for_instrument(files, use_resampling=True):
     return all_ccfs, all_v_grids, all_obo_ccfs
 
 
-def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True, 
-                         show_shifted=True, save_plots=False, output_dir=None):
+def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, 
+                         show_shifted=True, save_plots=False, output_dir=None, normalize=True):
     """Plot CCFs for ALL files in a specific dataset"""
     instruments = ['harpsn', 'harps', 'expres', 'neid']
     
-    print(f"\nAnalyzing DS{dset_num}...")
+    print(f"\nAnalyzing DS{dset_num} (normalize={normalize})...")
     
     ccf_dir = os.path.join(essp_dir, f'DS{dset_num}', 'CCFs')
     if not os.path.exists(ccf_dir):
@@ -116,13 +92,14 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
     
     # Plot 1: Order-by-Order CCFs for ALL files
     fig, axes = plt.subplots(1, 4, figsize=(16, 4))
-    fig.suptitle(f'DS{dset_num} - Order-by-Order CCFs (All Files)', fontsize=14)
+    norm_text = "Normalized" if normalize else "Raw"
+    fig.suptitle(f'DS{dset_num} - Order-by-Order CCFs ({norm_text}) - All Files', fontsize=14)
     
     for iinst, inst in enumerate(instruments):
         ax = axes[iinst]
         ax.set_title(f'{inst.upper()}')
         ax.set_xlabel('Velocity [km/s]')
-        ax.set_ylabel('Normalized Counts')
+        ax.set_ylabel('Normalized Counts' if normalize else 'Counts')
         
         # Get ALL files for this instrument
         files = glob(os.path.join(ccf_dir, f'DS{dset_num}*_{inst}.fits'))
@@ -133,24 +110,20 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
         print(f"  {inst}: Processing {len(files)} files")
         
         # Process all files
-        all_ccfs, all_v_grids, all_obo_ccfs = process_all_files_for_instrument(files, use_resampling)
+        all_ccfs, all_v_grids, all_obo_ccfs = process_all_files_for_instrument(files)
         
         if not all_ccfs:
             ax.text(0.5, 0.5, 'No valid data', ha='center', va='center', transform=ax.transAxes)
             continue
         
         # Use the first file to get the number of orders and setup colors
-        if use_resampling:
-            ccf_dict = resample_ccf(files[0])
-            num_ord = len(ccf_dict['echelle_orders'])
-        else:
-            hdus = fits.open(files[0])
-            num_ord = len(hdus['echelle_orders'].data)
-            hdus.close()
+        hdus = fits.open(files[0])
+        num_ord = len(hdus['echelle_orders'].data)
+        hdus.close()
         
         colors = sns.color_palette('Spectral', num_ord)
         
-        # Plot all order-by-order CCFs from all files
+        # Plot ONLY order-by-order CCFs from all files (NO COMBINED)
         for file_idx, (ccf, v_grid, obo_ccf) in enumerate(zip(all_ccfs, all_v_grids, all_obo_ccfs)):
             alpha = 0.3 if len(all_ccfs) > 10 else 0.7  # Adjust transparency based on number of files
             
@@ -158,21 +131,23 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
             for nord in range(num_ord):
                 if np.sum(np.isfinite(obo_ccf[nord])) == 0:
                     continue
-                ax.plot(v_grid, obo_ccf[nord]/np.nanmax(obo_ccf[nord]), 
-                       color=colors[nord], alpha=alpha, linewidth=0.5)
-            
-            # Plot combined CCF
-            ax.plot(v_grid, ccf/np.nanmax(ccf), color='k', alpha=alpha, linewidth=1)
+                
+                if normalize:
+                    y_data = obo_ccf[nord]/np.nanmax(obo_ccf[nord])
+                else:
+                    y_data = obo_ccf[nord]
+                
+                ax.plot(v_grid, y_data, color=colors[nord], alpha=alpha, linewidth=0.5)
         
         # Add legend only for the first subplot
         if iinst == 0:
-            ax.plot([], [], color='k', linewidth=2, label=f'Combined CCFs (n={len(all_ccfs)})')
-            ax.plot([], [], color='gray', linewidth=1, label='Order-by-order CCFs')
+            ax.plot([], [], color='gray', linewidth=1, label=f'Order-by-order CCFs (n={len(all_ccfs)} files)')
             ax.legend()
     
     plt.tight_layout()
     if save_plots and output_dir:
-        filename = os.path.join(output_dir, f'DS{dset_num}_all_obo_ccfs.png')
+        norm_suffix = "_normalized" if normalize else "_raw"
+        filename = os.path.join(output_dir, f'DS{dset_num}_all_obo_ccfs{norm_suffix}.png')
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         print(f"  Saved: {filename}")
     plt.show()
@@ -180,18 +155,18 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
     # Plot 2: Combined CCFs from ALL files
     if show_shifted:
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
-        fig.suptitle(f'DS{dset_num} - Combined CCFs (All Files)', fontsize=14)
+        fig.suptitle(f'DS{dset_num} - Combined CCFs ({norm_text}) - All Files', fontsize=14)
         ax1.set_title('Original')
         ax2.set_title('Offset-Corrected')
         axes = [ax1, ax2]
     else:
         fig, ax1 = plt.subplots(1, 1, figsize=(6, 4))
-        fig.suptitle(f'DS{dset_num} - Combined CCFs (All Files)', fontsize=14)
+        fig.suptitle(f'DS{dset_num} - Combined CCFs ({norm_text}) - All Files', fontsize=14)
         axes = [ax1]
     
     for ax in axes:
         ax.set_xlabel('Velocity [km/s]')
-        ax.set_ylabel('Normalized Counts')
+        ax.set_ylabel('Normalized Counts' if normalize else 'Counts')
     
     colors = sns.color_palette('Set1', len(instruments))
     
@@ -203,7 +178,7 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
         print(f"  {inst}: Plotting {len(files)} combined CCFs")
         
         # Process all files for this instrument
-        all_ccfs, all_v_grids, all_obo_ccfs = process_all_files_for_instrument(files, use_resampling)
+        all_ccfs, all_v_grids, all_obo_ccfs = process_all_files_for_instrument(files)
         
         if not all_ccfs:
             continue
@@ -211,7 +186,10 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
         alpha = 0.3 if len(all_ccfs) > 10 else 0.7  # Adjust transparency
         
         for file_idx, (ccf, v_grid) in enumerate(zip(all_ccfs, all_v_grids)):
-            ccf_norm = ccf / np.nanmax(ccf)
+            if normalize:
+                ccf_norm = ccf / np.nanmax(ccf)
+            else:
+                ccf_norm = ccf
             
             # Original CCF
             label = f'{inst.upper()} (n={len(all_ccfs)})' if file_idx == 0 else None
@@ -231,32 +209,54 @@ def plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, use_resampling=True,
     
     plt.tight_layout()
     if save_plots and output_dir:
-        filename = os.path.join(output_dir, f'DS{dset_num}_all_combined_ccfs.png')
+        norm_suffix = "_normalized" if normalize else "_raw"
+        filename = os.path.join(output_dir, f'DS{dset_num}_all_combined_ccfs{norm_suffix}.png')
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         print(f"  Saved: {filename}")
     plt.show()
+
+
+def plot_ccfs_normalized_and_raw(essp_dir, dset_num, offset_dict, 
+                                show_shifted=True, save_plots=False, output_dir=None):
+    """Plot both normalized and raw CCFs for a dataset"""
+    print(f"\n=== Plotting both normalized and raw CCFs for DS{dset_num} ===")
+    
+    # Plot normalized version
+    plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, 
+                         show_shifted=show_shifted, save_plots=save_plots, 
+                         output_dir=output_dir, normalize=True)
+    
+    # Plot raw version
+    plot_ccfs_for_dataset(essp_dir, dset_num, offset_dict, 
+                         show_shifted=show_shifted, save_plots=save_plots, 
+                         output_dir=output_dir, normalize=False)
 
 
 def main():
     # ========== EDIT THESE SETTINGS ==========
     essp_dir = '/work2/lbuc/data/ESSP4/ESSP4'
     output_dir = '/work2/lbuc/iara/GitHub/ESSP/Figures/CCF_figures'
-    offset_file = None  # Path to offset CSV file, or None for defaults
+    offset_filename = 'instrument_offsets_iccf.csv'  # Just the filename
     dataset = None  # Specific dataset number, or None for all datasets
-    use_resampling = True
     show_shifted = True
     save_plots = True
+    plot_both_versions = True  # Set to True to plot both normalized and raw
     # =========================================
     
     print(f"ESSP4 CCF Analysis")
     print(f"Data directory: {essp_dir}")
     print(f"Save plots: {save_plots}")
+    print(f"Plot both normalized and raw: {plot_both_versions}")
     if save_plots:
         print(f"Output directory: {output_dir}")
     
     if not os.path.exists(essp_dir):
         print(f"Error: {essp_dir} not found")
         return
+    
+    # Construct full path to offset file
+    offset_file = os.path.join(essp_dir, offset_filename)
+    print(f"Looking for offset file: {offset_file}")
     
     # Load offsets
     offset_dict = load_offsets(offset_file)
@@ -271,13 +271,22 @@ def main():
         print("Analyzing all datasets...")
     
     for dset_num in datasets:
-        plot_ccfs_for_dataset(
-            essp_dir, dset_num, offset_dict,
-            use_resampling=use_resampling,
-            show_shifted=show_shifted,
-            save_plots=save_plots,
-            output_dir=output_dir if save_plots else None
-        )
+        if plot_both_versions:
+            plot_ccfs_normalized_and_raw(
+                essp_dir, dset_num, offset_dict,
+                show_shifted=show_shifted,
+                save_plots=save_plots,
+                output_dir=output_dir if save_plots else None
+            )
+        else:
+            # Default to normalized only
+            plot_ccfs_for_dataset(
+                essp_dir, dset_num, offset_dict,
+                show_shifted=show_shifted,
+                save_plots=save_plots,
+                output_dir=output_dir if save_plots else None,
+                normalize=True
+            )
     
     if save_plots:
         print(f"\nAll plots saved to: {output_dir}")
