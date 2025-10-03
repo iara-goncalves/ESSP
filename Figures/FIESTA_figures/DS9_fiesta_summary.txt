@@ -1,0 +1,52 @@
+FIESTA Analysis Summary for DS9
+Generated on: 2025-10-03 14:56:05
+============================================================
+
+HARPSN:
+  Number of observations: 66
+  Number of FIESTA modes: 10
+  RV range: 0.0 to 0.0 m/s
+  RV RMS: 0.00 m/s
+  Activity indicator RMS values:
+    ΔRV_1: 2.96 m/s
+    ΔRV_2: 2.25 m/s
+    ΔRV_3: 4.11 m/s
+    ΔRV_4: 14.19 m/s
+    ΔRV_5: 204.20 m/s
+
+HARPS:
+  Number of observations: 15
+  Number of FIESTA modes: 10
+  RV range: 0.0 to 0.0 m/s
+  RV RMS: 0.00 m/s
+  Activity indicator RMS values:
+    ΔRV_1: 1.43 m/s
+    ΔRV_2: 1.67 m/s
+    ΔRV_3: 3.36 m/s
+    ΔRV_4: 13.85 m/s
+    ΔRV_5: 109.90 m/s
+
+EXPRES:
+  Number of observations: 100
+  Number of FIESTA modes: 10
+  RV range: 0.0 to 0.0 m/s
+  RV RMS: 0.00 m/s
+  Activity indicator RMS values:
+    ΔRV_1: 1.89 m/s
+    ΔRV_2: 1.80 m/s
+    ΔRV_3: 3.66 m/s
+    ΔRV_4: 12.12 m/s
+    ΔRV_5: 32.93 m/s
+
+NEID:
+  Number of observations: 60
+  Number of FIESTA modes: 10
+  RV range: 0.0 to 0.0 m/s
+  RV RMS: 0.00 m/s
+  Activity indicator RMS values:
+    ΔRV_1: 1.78 m/s
+    ΔRV_2: 2.13 m/s
+    ΔRV_3: 3.78 m/s
+    ΔRV_4: 10.10 m/s
+    ΔRV_5: 33.64 m/s
+
