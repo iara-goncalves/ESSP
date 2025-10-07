@@ -131,6 +131,48 @@ for ds, subdf in df_export.groupby("Dataset"):
     outfile = os.path.join(outdir, f"{ds}_RV.dat")
     np.savetxt(outfile, data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
 
+###### RV - Separate files per instrument ######
+# Loop over datasets
+for ds, subdf in df_export.groupby("Dataset"):
+    
+    # Define instrument groups (harps includes harpsn)
+    instrument_groups = {
+        'harps': ['harps', 'harpsn'],
+        'expres': ['expres'],
+        'neid': ['neid']
+    }
+    
+    # Process each instrument group
+    for inst_name, inst_list in instrument_groups.items():
+        # Filter data for this instrument group
+        inst_data = subdf[subdf["Instrument"].isin(inst_list)].copy()
+        
+        if inst_data.empty:
+            continue
+            
+        # Sort by time
+        inst_data = inst_data.sort_values("Time [eMJD]")
+        
+        # Columns
+        time = inst_data["Time [eMJD]"].values
+        rv = inst_data["RV [m/s]"].values
+        rv_err = inst_data["RV Err. [m/s]"].values
+        jitter_flag = np.zeros(len(inst_data), dtype=int)        # all 0
+        
+        # Offset flag: 0 for harpsn, 1 for harps, 0 for others
+        if inst_name == 'harps':
+            offset_flag = (inst_data["Instrument"] == "harps").astype(int).values
+        else:
+            offset_flag = np.zeros(len(inst_data), dtype=int)
+            
+        subset_flag = -1 * np.ones(len(inst_data), dtype=int)    # all -1
+
+        # Combine
+        data = np.column_stack([time, rv, rv_err, jitter_flag, offset_flag, subset_flag])
+
+        # Save to .dat file
+        outfile = os.path.join(outdir, f"{ds}_{inst_name}_RV.dat")
+        np.savetxt(outfile, data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
 
 ###### Activity indicators ######
 
@@ -214,6 +256,62 @@ for ds, subdf in df_export.groupby("Dataset"):
     ca2_data = np.column_stack([time, ca2, ca2_err, jitter_flag, offset_flag, subset_flag])
     ca2_outfile = os.path.join(outdir, f"{ds}_CaII.dat")
     np.savetxt(ca2_outfile, ca2_data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
+
+###### Activity indicators - Separate files per instrument ######
+
+# Activity indicators to process
+activity_indicators = [
+    ("BIS [m/s]", bis_err_val, "BIS"),
+    ("CCF Contrast", contrast_err_val, "Contrast"),
+    ("CCF FWHM [m/s]", fwhm_err_val, "FWHM"),
+    ("H-alpha Emission", halpha_err_val, "Halpha"),
+    ("CaII Emission", ca2_err_val, "CaII")
+]
+
+# Loop over datasets
+for ds, subdf in df_export.groupby("Dataset"):
+    
+    # Define instrument groups (harps includes harpsn)
+    instrument_groups = {
+        'harps': ['harps', 'harpsn'],
+        'expres': ['expres'],
+        'neid': ['neid']
+    }
+    
+    # Process each activity indicator
+    for col_name, err_val, short_name in activity_indicators:
+        
+        # Process each instrument group
+        for inst_name, inst_list in instrument_groups.items():
+            # Filter data for this instrument group
+            inst_data = subdf[subdf["Instrument"].isin(inst_list)].copy()
+            
+            if inst_data.empty or col_name not in inst_data.columns:
+                continue
+                
+            # Sort by time
+            inst_data = inst_data.sort_values("Time [eMJD]")
+            
+            # Columns
+            time = inst_data["Time [eMJD]"].values
+            values = inst_data[col_name].values
+            errors = np.full(len(inst_data), err_val)  # constant error
+            jitter_flag = np.zeros(len(inst_data), dtype=int)  # all 0
+            
+            # Offset flag: 0 for harpsn, 1 for harps, 0 for others
+            if inst_name == 'harps':
+                offset_flag = (inst_data["Instrument"] == "harps").astype(int).values
+            else:
+                offset_flag = np.zeros(len(inst_data), dtype=int)
+                
+            subset_flag = -1 * np.ones(len(inst_data), dtype=int)  # all -1
+
+            # Combine
+            data = np.column_stack([time, values, errors, jitter_flag, offset_flag, subset_flag])
+            
+            # Save to .dat file
+            outfile = os.path.join(outdir, f"{ds}_{inst_name}_{short_name}.dat")
+            np.savetxt(outfile, data, fmt=["%.6f", "%.6f", "%.6f", "%d", "%d", "%d"])
 
 
 ####### Activity Plots #########
