@@ -22,22 +22,25 @@ def load_offsets(offset_file):
     try:
         with open(offset_file, 'r') as f:
             lines = f.readlines()
-            for line in lines[1:]:  # Skip header
-                parts = line.strip().split(',')
+            for line in lines:
+                line = line.strip()
+                if not line or line.startswith('#'):  # Skip empty lines and comments
+                    continue
+                    
+                parts = line.split(',')
                 if len(parts) >= 2:
-                    dataset = parts[0]
-                    instrument_offsets = {}
-                    # Parse instrument offsets (assuming format: DS1,harps:0.5,harpsn:1.2,etc.)
-                    for i in range(1, len(parts)):
-                        if ':' in parts[i]:
-                            inst, offset = parts[i].split(':')
-                            instrument_offsets[inst.lower()] = float(offset)
-                    offsets[dataset] = instrument_offsets
+                    instrument = parts[0].strip().lower()
+                    offset_value = float(parts[1].strip())
+                    offsets[instrument] = offset_value
+                    
+        print(f"Loaded offsets: {offsets}")
+        
     except Exception as e:
         print(f"Error reading offset file: {e}")
         return {}
     
     return offsets
+
 
 def get_available_datasets(essp_dir):
     """Get list of available datasets"""
@@ -51,10 +54,11 @@ def get_available_datasets(essp_dir):
                 continue
     return sorted(datasets)
 
+
 def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, output_dir=None):
     """Apply FIESTA analysis to CCFs from a dataset using actual ESSP CCF errors"""
     try:
-        from FIESTA_II import FIESTA  # Import here to avoid issues if not available
+        from FIESTA_II import FIESTA
     except ImportError:
         print("Error: FIESTA_II module not found. Please install FIESTA first.")
         return None
@@ -76,7 +80,7 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
         # Get all files for this instrument
         files = sorted(glob(os.path.join(ccf_dir, f'DS{dset_num}.*_ccfs_{inst}.fits')))
         if not files:
-            print(f"  No files found for {inst}")
+            print(f"No files found for {inst}")
             continue
         
         # Process files to extract CCF data with proper errors
@@ -90,7 +94,7 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
             try:
                 hdus = fits.open(file)
                 
-                # Extract data from FITS file (using CORRECT UPPERCASE extension names from documentation)
+                # Extract data from FITS file
                 v_grid = hdus['V_GRID'].data.copy()  # Velocity grid [km/s]
                 ccf = hdus['CCF'].data.copy()        # Global CCF
                 e_ccf = hdus['E_CCF'].data.copy()    # Global CCF errors
@@ -99,25 +103,25 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
                 try:
                     if 'TIME' in hdus[0].header:
                         emjd = hdus[0].header['TIME']  # Extended Modified Julian Date
-                        emjd_times.append(emjd)  # Keep as eMJD, no conversion
+                        emjd_times.append(emjd)
                     else:
-                        print(f"    Warning: No TIME in header for {os.path.basename(file)}, using index")
+                        print(f"Warning: No TIME in header for {os.path.basename(file)}, using index")
                         emjd_times.append(len(emjd_times))  # Use index as fallback
                         
                 except Exception as e:
-                    print(f"    Warning: Could not extract eMJD from {os.path.basename(file)}: {e}")
+                    print(f"Warning: Could not extract eMJD from {os.path.basename(file)}: {e}")
                     emjd_times.append(len(emjd_times))  # Use index as fallback
                 
                 hdus.close()
                 
                 # Check for valid data
                 if np.sum(np.isfinite(ccf)) == 0:
-                    print(f"    Skipping {os.path.basename(file)}: no valid CCF data")
+                    print(f"Skipping {os.path.basename(file)}: no valid CCF data")
                     continue
                 
                 # Check for valid errors
                 if np.sum(np.isfinite(e_ccf)) == 0:
-                    print(f"    Warning: {os.path.basename(file)}: no valid error data, estimating errors")
+                    print(f"Warning: {os.path.basename(file)}: no valid error data, estimating errors")
                     # Fallback error estimation if E_CCF is invalid
                     ccf_max = np.nanmax(ccf)
                     ccf_depth = ccf_max - np.nanmin(ccf)
@@ -129,16 +133,16 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
                 file_names.append(os.path.basename(file))
                 
             except KeyError as e:
-                print(f"    Error: Missing FITS extension in {os.path.basename(file)}: {e}")
-                print(f"    Available extensions: {[hdu.name for hdu in hdus]}")
+                print(f"Error: Missing FITS extension in {os.path.basename(file)}: {e}")
+                print(f"Available extensions: {[hdu.name for hdu in hdus]}")
                 hdus.close()
                 continue
             except Exception as e:
-                print(f"    Error processing {os.path.basename(file)}: {e}")
+                print(f"Error processing {os.path.basename(file)}: {e}")
                 continue
         
         if len(ccf_data) < 2:
-            print(f"  Insufficient data for {inst} (need at least 2 CCFs, got {len(ccf_data)})")
+            print(f"Insufficient data for {inst} (need at least 2 CCFs, got {len(ccf_data)})")
             continue
         
         # Convert to numpy arrays
@@ -150,28 +154,68 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
         eCCF = np.zeros((n_points, n_files))
         V_grid = v_grids[0]  # Assuming all have same velocity grid
         
-        # Normalize CCFs and handle errors properly
+        
+
+        # COMPREHENSIVE CCF ANALYSIS AND PROPER NORMALIZATION FOR FIESTA
         for i, (ccf, e_ccf) in enumerate(zip(ccf_data, ccf_errors)):
-            # Find normalization factor
-            ccf_max = np.nanmax(ccf)
-            if ccf_max <= 0:
-                print(f"    Skipping observation {i}: invalid CCF maximum")
-                continue
             
-            # Normalize CCF
-            ccf_norm = ccf / ccf_max
-            CCF[:, i] = ccf_norm
+            # DETAILED ANALYSIS (first few CCFs only)
+            if i < 3:
+                print(f"\n=== CCF {i} DETAILED ANALYSIS ===")
+                print(f"Raw CCF stats:")
+                print(f"  Min: {np.nanmin(ccf):.2f}")
+                print(f"  Max: {np.nanmax(ccf):.2f}")
+                print(f"  Mean: {np.nanmean(ccf):.2f}")
+                print(f"  Range: {np.nanmax(ccf) - np.nanmin(ccf):.2f}")
+                
+                # Find the line center (minimum for absorption)
+                min_idx = np.nanargmin(ccf)
+                max_idx = np.nanargmax(ccf)
+                print(f"  Deepest point: v={V_grid[min_idx]:.2f} km/s, flux={ccf[min_idx]:.2f}")
+                print(f"  Highest point: v={V_grid[max_idx]:.2f} km/s, flux={ccf[max_idx]:.2f}")
             
-            # Propagate errors through normalization: e_norm = e_ccf / ccf_max
-            e_ccf_norm = e_ccf / ccf_max
+            # STEP 1: NORMALIZE TO CONTINUUM = 1.0
+            continuum_flux = np.nanmax(ccf)  # Use maximum as continuum
+            ccf_normalized = ccf / continuum_flux
             
-            # Handle any remaining invalid errors
-            invalid_errors = ~np.isfinite(e_ccf_norm) | (e_ccf_norm <= 0)
+            # STEP 2: INVERT FOR FIESTA (CRITICAL!)
+            # FIESTA expects: high values = line center, low values = continuum
+            ccf_inverted = 1.0 - ccf_normalized
+            
+            # STEP 3: VERIFY INVERSION
+            line_center_inverted = np.nanmax(ccf_inverted)  # Should be highest after inversion
+            continuum_inverted = np.nanmin(ccf_inverted)   # Should be lowest after inversion
+            line_depth = line_center_inverted - continuum_inverted
+            
+            if i < 3:  # Debug first few
+                print(f"CCF {i} AFTER INVERSION:")
+                print(f"  Original range: [{np.nanmin(ccf_normalized):.3f}, {np.nanmax(ccf_normalized):.3f}]")
+                print(f"  Inverted range: [{np.nanmin(ccf_inverted):.3f}, {np.nanmax(ccf_inverted):.3f}]")
+                print(f"  Line depth (inverted): {line_depth:.3f}")
+                print(f"  → Ready for FIESTA!")
+            
+            # Check if inversion is reasonable
+            if line_depth < 0.01:  # Less than 1% depth
+                print(f"Warning: CCF {i} appears too shallow after inversion (depth = {line_depth:.3f})")
+            elif line_depth > 0.8:  # More than 80% depth
+                print(f"Warning: CCF {i} appears too deep after inversion (depth = {line_depth:.3f})")
+            
+            # STEP 4: STORE INVERTED CCF FOR FIESTA
+            CCF[:, i] = ccf_inverted
+            
+            # STEP 5: PROPAGATE ERRORS (same normalization, no inversion needed for errors)
+            e_ccf_normalized = e_ccf / continuum_flux
+            
+            # Handle invalid errors
+            invalid_errors = ~np.isfinite(e_ccf_normalized) | (e_ccf_normalized <= 0)
             if np.any(invalid_errors):
-                # Use photon noise estimate for invalid errors
-                e_ccf_norm[invalid_errors] = np.sqrt(np.abs(ccf_norm[invalid_errors])) * 0.01
+                # Use photon noise estimate based on normalized flux
+                e_ccf_normalized[invalid_errors] = np.sqrt(np.abs(ccf_normalized[invalid_errors])) * 0.01
             
-            eCCF[:, i] = e_ccf_norm
+            eCCF[:, i] = e_ccf_normalized
+
+
+
         
         # Add CCF diagnostics
         print(f"  CCF diagnostics:")
@@ -196,12 +240,7 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
             
             # FIESTA returns 6 values when noise is present:
             # df, v_k, σv_k, A_k, σA_k, RV_gauss
-            result = FIESTA(
-                V_grid, CCF, eCCF, 
-                template=[],  # Let FIESTA calculate template automatically
-                SNR=2.0,
-                k_max=k_max
-            )
+            result = FIESTA(V_grid, CCF, eCCF, template=[], SNR=2.0, k_max=k_max)
             
             if len(result) == 6:
                 # With noise (normal case)
@@ -292,6 +331,7 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
     return results
 
 
+
 def periodogram6(ax, time, data, vlines=None):
     """Calculate and plot periodogram similar to the reference code"""
     from scipy import signal
@@ -323,6 +363,7 @@ def periodogram6(ax, time, data, vlines=None):
         print(f"Error calculating periodogram: {e}")
         ax.text(0.5, 0.5, 'Periodogram\nError', ha='center', va='center', 
                 transform=ax.transAxes)
+
 
 def plot_fiesta_results(results, dset_num, save_plots=True, output_dir=None):
     """Plot FIESTA results in the same style as the reference figure"""
@@ -462,6 +503,7 @@ def plot_fiesta_results(results, dset_num, save_plots=True, output_dir=None):
     else:
         plt.show()
 
+
 def save_activity_indicators_dat(results, dset_num, output_dir):
     """Save FIESTA activity indicators (differential RVs) to .dat files with eMJD times"""
     if not results:
@@ -543,6 +585,7 @@ def save_activity_indicators_dat(results, dset_num, output_dir):
             print(f"    Saved: {filename} (n_obs={n_obs})")
 
     print(f"All FIESTA files saved with eMJD times!")
+
 
 def main():
     """Main function to run FIESTA analysis"""
