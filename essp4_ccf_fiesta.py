@@ -99,7 +99,7 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
                 ccf = hdus['CCF'].data.copy()        # Global CCF
                 e_ccf = hdus['E_CCF'].data.copy()    # Global CCF errors
                 
-                # Extract eMJD from FITS header TIME field (keep as eMJD)
+                # Extract eMJD from FITS header TIME field
                 try:
                     if 'TIME' in hdus[0].header:
                         emjd = hdus[0].header['TIME']  # Extended Modified Julian Date
@@ -154,8 +154,6 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
         eCCF = np.zeros((n_points, n_files))
         V_grid = v_grids[0]  # Assuming all have same velocity grid
         
-        
-
         # COMPREHENSIVE CCF ANALYSIS AND PROPER NORMALIZATION FOR FIESTA
         for i, (ccf, e_ccf) in enumerate(zip(ccf_data, ccf_errors)):
             
@@ -213,9 +211,6 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
                 e_ccf_normalized[invalid_errors] = np.sqrt(np.abs(ccf_normalized[invalid_errors])) * 0.01
             
             eCCF[:, i] = e_ccf_normalized
-
-
-
         
         # Add CCF diagnostics
         print(f"  CCF diagnostics:")
@@ -240,14 +235,27 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
             
             # FIESTA returns 6 values when noise is present:
             # df, v_k, σv_k, A_k, σA_k, RV_gauss
-            result = FIESTA(V_grid, CCF, eCCF, template=[], SNR=2.0, k_max=k_max)
+            result = FIESTA(V_grid, CCF, eCCF, k_max=k_max, template=[])
             
             if len(result) == 6:
                 # With noise (normal case)
                 df, v_k, sigma_v_k, A_k, sigma_A_k, RV_gauss = result
                 
+                # ===== ADD DEBUG HERE - RIGHT AFTER FIESTA RETURNS =====
+                print(f"\n=== DEBUGGING RV_GAUSS for {inst} ===")
+                print(f"RV_gauss type: {type(RV_gauss)}")
+                print(f"RV_gauss shape: {RV_gauss.shape if hasattr(RV_gauss, 'shape') else 'no shape'}")
+                print(f"RV_gauss raw values (first 5): {RV_gauss[:5] if hasattr(RV_gauss, '__len__') else RV_gauss}")
+                print(f"RV_gauss min/max/std: {np.min(RV_gauss):.6f} / {np.max(RV_gauss):.6f} / {np.std(RV_gauss):.6f}")
+                
                 # Convert all to m/s
                 RV_gauss_ms = RV_gauss * 1000  # This should be the main RV signal
+                
+                print(f"After conversion to m/s:")
+                print(f"RV_gauss_ms min/max/std: {np.min(RV_gauss_ms):.6f} / {np.max(RV_gauss_ms):.6f} / {np.std(RV_gauss_ms):.6f}")
+                print(f"=== END DEBUG ===\n")
+                # ===== END DEBUG BLOCK =====
+                
                 RV_FT_k = v_k * 1000          # These are the Fourier mode variations
                 eRV_FT_k = sigma_v_k * 1000   # Uncertainties
                 
@@ -329,7 +337,6 @@ def analyze_ccfs_with_fiesta(essp_dir, dset_num, k_max=5, save_results=False, ou
             continue
     
     return results
-
 
 
 def periodogram6(ax, time, data, vlines=None):
