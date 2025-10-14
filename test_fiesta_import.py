@@ -8,7 +8,7 @@ sys.path.append('/work2/lbuc/iara/GitHub/ESSP')
 print("Trying to import FIESTA...")
 try:
     from FIESTA_II import FIESTA
-    print("✅ FIESTA imported successfully!")
+    print("FIESTA imported successfully!")
     print(f"FIESTA type: {type(FIESTA)}")
     
     # Test with proper 2D dummy data (FIESTA expects CCF.shape[1] to exist)
