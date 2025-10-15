@@ -22,7 +22,7 @@ class FIESTAProcessor:
         data = {}
         
         for inst in self.instruments:
-            filename = f"DS{dset_num:02d}_invCCF_{inst}.pkl"
+            filename = f"DS{dset_num}_invCCF_{inst}.pkl"
             filepath = os.path.join(self.ccf_data_dir, filename)
             
             if os.path.exists(filepath):
@@ -63,7 +63,7 @@ class FIESTAProcessor:
             # Plot mean with error envelope
             axes[i].plot(v_grid, mean_inv_ccf, color=colors[i], linewidth=2, label='Mean')
             axes[i].fill_between(v_grid, mean_inv_ccf - mean_error, mean_inv_ccf + mean_error, 
-                                alpha=0.3, color=colors[i], label='±1σ')
+                                alpha=0.3, color=colors[i], label='±1σ (SEM)') #SEM represents Standard Error of the Mean
             
             axes[i].set_title(f'{inst.upper()} (n={inst_data["n_files"]})')
             axes[i].set_xlabel('Velocity [km/s]')
@@ -123,9 +123,18 @@ class FIESTAProcessor:
                     RV_FT_k = v_k * 1000
                     eRV_FT_k = sigma_v_k * 1000
                     
+                    # Print RV_gauss values with maximum precision
+                    print(f"    RV_gauss values (m/s) for {inst.upper()}:")
+                    print(f"    Shape: {RV_gauss_ms.shape}")
+                    print(f"    Values: {RV_gauss_ms}")
+                    print(f"    Min: {np.min(RV_gauss_ms):.15f}")
+                    print(f"    Max: {np.max(RV_gauss_ms):.15f}")
+                    print(f"    Mean: {np.mean(RV_gauss_ms):.15f}")
+                    print(f"    Std: {np.std(RV_gauss_ms):.15f}")
+                    
                     # Calculate differential RVs
                     if np.std(RV_gauss_ms) < 1e-3:  # Flat RV_gauss
-                        print(f"    Warning: RV_gauss is flat, using first mode as reference")
+                        print(f"    Warning: RV_gauss is flat (std={np.std(RV_gauss_ms):.15f}), using first mode as reference")
                         RV_reference = RV_FT_k[0, :].copy()
                         ΔRV_k = np.zeros((RV_FT_k.shape[0]-1, RV_FT_k.shape[1]))
                         for k in range(1, RV_FT_k.shape[0]):
@@ -150,7 +159,7 @@ class FIESTAProcessor:
                     }
                     
                     print(f"    Success! {n_files} CCFs, {ΔRV_k.shape[0]} modes")
-                    print(f"    RV range: {np.min(RV_reference):.1f} to {np.max(RV_reference):.1f} m/s")
+                    print(f"    RV range: {np.min(RV_reference):.15f} to {np.max(RV_reference):.15f} m/s")
                 
                 else:
                     print(f"    Warning: FIESTA returned {len(result)} values (expected 6)")
@@ -160,7 +169,7 @@ class FIESTAProcessor:
                 continue
         
         return results
-    
+
     def periodogram(self, ax, time, data, vlines=None):
         """Calculate and plot periodogram"""
         data_centered = data - np.mean(data)

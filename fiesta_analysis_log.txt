@@ -9,99 +9,1777 @@ Processing Dataset 1
 ============================================================
 
 Loading pickle data for DS1...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS01_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS01_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS01_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS01_invCCF_neid.pkl
-No data found for DS1
+  harpsn: Loaded 84 CCFs
+  harps: Loaded 24 CCFs
+  expres: Loaded 96 CCFs
+  neid: Loaded 84 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS1_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 84), eMJD range: 59337.993481 to 59423.926247
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (84,)
+    Values: [-2.0881015  -1.72496642  2.40968927 -2.7204701   1.81782336  0.32702871
+ -1.15728359  1.73087965 -1.77080348 -1.1082059  -3.48725991 -0.80260331
+ -1.46633968  2.63552383  0.35526734 -0.01593741  1.9275124   2.07040817
+ -0.62433062  1.88216229 -0.14650161  3.16616383  2.13672149 -2.02128471
+ -2.38521904  0.70913715  0.46026632 -1.9427518  -1.57141961 -1.35747342
+  1.34739564  1.06056034  2.00163127 -0.28428972 -1.31920411  1.69625165
+ -0.79627367 -1.6502553  -1.10204449  0.65767899  0.09140433  2.79084991
+ -3.45755216  0.5726748  -2.85680942  2.01348078  2.64561021  0.45243313
+  2.69635326 -0.9032869   1.64751051  1.12544488  2.01356211 -2.63624286
+  1.44158439 -2.11653489 -3.05248517 -1.7156448   2.74439774 -2.20407366
+ -0.58316802  1.0124181   0.52251091 -1.90797494 -3.3678047  -1.6118793
+ -1.68295861 -0.41648255  2.72454165 -2.53460068 -1.03916227  1.62752004
+  1.76687609  2.73196877  1.39024832 -0.8252264   0.76954769  1.02120805
+  1.54058581  1.27215939 -1.27617639  1.43006125 -4.11794037  1.75353838]
+    Min: -4.117940372178164
+    Max: 3.166163831982594
+    Mean: -0.019743229676034
+    Std: 1.866152829308770
+    Success! 84 CCFs, 5 modes
+    RV range: -4.117940372178164 to 3.166163831982594 m/s
+  Processing HARPS...
+    CCF shape: (61, 24), eMJD range: 59399.074692 to 59422.081835
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.944
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.944 km/s
+
+Processing individual CCFs...
+✓ All 24 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (24,)
+    Values: [-0.46755315  2.2161034   0.13867225  0.74572204  0.75481977  2.46868462
+ -1.13935134  2.90404224 -0.23952903  1.95027714 -1.42404224  2.66075711
+  1.25935947 -2.75666233  0.46472409 -3.12506531 -0.64511264 -1.12115012
+ -2.53514373 -5.04911731  2.38983591  2.81520093 -0.45451226 -3.146402  ]
+    Min: -5.049117306056283
+    Max: 2.904042242087734
+    Mean: -0.055643437488419
+    Std: 2.155409121238693
+    Success! 24 CCFs, 5 modes
+    RV range: -5.049117306056283 to 2.904042242087734 m/s
+  Processing EXPRES...
+    CCF shape: (61, 96), eMJD range: 59338.301795 to 59422.296261
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.476, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 96 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (96,)
+    Values: [ 1.92811657  0.62348524  0.02993222  2.04611394 -0.30759888 -0.18249109
+ -0.64571714  0.20675162  1.52008883  2.37661719 -0.07016329  4.59699682
+  1.08346896 -0.07648546  4.52512286  0.02103143 -1.39900763 -2.1778115
+  0.84517296  1.81112821 -2.60009324  0.78969958  1.63066003 -2.18421669
+  0.4549529  -0.12634905 -1.11147777 -1.5863298  -1.13900637 -0.95868012
+ -0.54050638 -1.49230855 -0.01101562  0.92849665 -4.21234578  1.96623357
+  3.83565696  0.59353123 -0.42836764  1.09377594  0.36486055  1.34501608
+ -2.43434503 -0.92288614  1.46235447 -1.05473995  3.11257785 -0.20757173
+  3.63206934 -1.05846151 -2.97543262 -0.77660145 -4.14160887  2.45988895
+  3.51505634 -1.68422854 -1.54862365  2.4444457   1.50898075 -3.0705764
+ -2.42990584 -1.48228025 -0.56979682  0.26835414 -1.84527484  0.54849814
+ -0.54304275 -3.4702979   4.17043917  0.90671245  2.8203486   0.29057527
+  4.55115174  0.79976758  0.09613855 -0.53911209 -0.07613464 -0.68129299
+ -2.69591464 -1.00726634  0.25916738 -1.78314117 -0.07044226  2.16930019
+  1.63671977 -0.20885921 -4.19450142 -2.25139138 -0.81739766 -1.11298174
+ -0.18276825 -1.33118141  1.99272989 -1.58808593 -1.66013406 -0.39713165]
+    Min: -4.212345777265675
+    Max: 4.596996818850216
+    Mean: 0.012487536680100
+    Std: 1.948191742864220
+    Success! 96 CCFs, 5 modes
+    RV range: -4.212345777265675 to 4.596996818850216 m/s
+  Processing NEID...
+    CCF shape: (61, 84), eMJD range: 59340.142771 to 59422.237326
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (84,)
+    Values: [ 0.62411538  1.46353421  0.12378162  2.73536682  2.25495007  2.97771213
+  1.71657403 -2.73667453 -2.5565029   0.07236847  2.35051193  0.48802725
+  2.09676056  1.83603004 -2.02735835  1.15859705 -0.19526583  1.91593342
+ -1.38507901  3.23244377 -0.23933393 -0.29945473 -3.73674135 -2.11752897
+ -0.73892641  3.26750228  0.03971059  2.86463098 -1.40862427  2.63975251
+ -2.7429074  -0.60411746 -2.91013014  1.33739391  4.13391287 -1.04103773
+  1.44011666 -3.49862541 -0.69088039  1.71629828 -0.92792134 -2.04136086
+ -0.37964128  0.35925645 -1.17614834  0.03121806  1.31977647 -0.31996762
+ -2.26390865  3.16400907  1.82035242  0.25717172 -4.50159526  1.94321338
+ -2.04909259  2.75673455 -2.7210368   2.57382633  0.60307171  2.5861938
+  1.23728022  2.9436225  -0.39060095 -3.795645    2.34726442 -1.46796569
+ -0.15531559 -2.53661799 -3.14665365 -1.86038274 -0.29147087 -1.23492973
+  1.51245127 -0.05240807  0.32734383 -1.10037826  2.90404891 -2.34991512
+ -2.73800235 -0.73972932 -1.77115335 -1.63152738 -1.58960054  2.609283  ]
+    Min: -4.501595256091603
+    Max: 4.133912871580547
+    Mean: 0.019285533104229
+    Std: 2.057438945576590
+    Success! 84 CCFs, 5 modes
+    RV range: -4.501595256091603 to 4.133912871580547 m/s
+Creating FIESTA plots for DS1...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS1_FIESTA_style.png
+
+Saving .dat files for DS1...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode5.dat
+Completed DS1
 
 ============================================================
 Processing Dataset 2
 ============================================================
 
 Loading pickle data for DS2...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS02_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS02_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS02_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS02_invCCF_neid.pkl
-No data found for DS2
+  harpsn: Loaded 90 CCFs
+  harps: Loaded 33 CCFs
+  expres: Loaded 110 CCFs
+  neid: Loaded 90 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS2_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 90), eMJD range: 59331.910942 to 59419.951685
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.461, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.461 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 90 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (90,)
+    Values: [-0.49842882  1.83455256  0.41978556  2.33878232 -0.39880021  0.65497154
+  0.22894012  3.33000913  1.64711427 -0.33565173  1.54197943 -1.29991973
+  1.10651069 -1.88063006  0.09054218  2.4916777   0.28585411  0.53815108
+ -0.80689728  0.68987895  3.49824636  0.2883818  -1.29510389  0.29592633
+ -1.9475191   1.47217489 -0.1196676  -0.65542974 -0.91122141  1.80071804
+  0.83540685  2.09890845  0.6971987  -1.29358287 -1.96891726  0.70930948
+  1.9520306   0.76251866 -0.57120463  0.06883219 -1.01806227 -0.31745684
+ -2.59382243  1.02958469 -2.65713369  2.1871013  -2.07902868 -1.34467966
+ -0.48980896  1.98317277 -0.11744455  0.89073653  0.40157224 -1.61588231
+  0.12116082  0.63570241  0.47755462 -1.36547384  2.87000461 -0.9353451
+  0.94196471 -1.11146776 -2.29505923 -0.01477164  0.07710593  0.44745901
+  0.48735222 -2.65088215 -0.52390424 -1.31690632  0.26381769 -1.30614453
+  0.93743762  3.03863619 -2.15675911  1.27906594  1.54459464  0.5768207
+ -1.47659162  0.25647073 -1.31311703 -0.82675561  1.03112053  0.04076619
+  0.07384675 -0.88398524 -0.41288341 -3.82777199  0.36463009 -2.39570875]
+    Min: -3.827771992447437
+    Max: 3.498246362354240
+    Mean: 0.028958440032043
+    Std: 1.462305738158765
+    Success! 90 CCFs, 5 modes
+    RV range: -3.827771992447437 to 3.498246362354240 m/s
+  Processing HARPS...
+    CCF shape: (61, 33), eMJD range: 59396.187173 to 59415.076140
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 33 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (33,)
+    Values: [ 0.97365745  0.39098193 -1.04074221  1.01844719  0.02684481 -0.42098651
+ -1.70710899 -0.84407794  0.80858265  0.33606055  0.17698962  0.62874883
+  1.95639644 -0.41352788  0.92940468  3.1006378   0.50378843 -3.06396915
+ -0.19453455 -0.47296654  0.17843131 -2.05939452  0.75621622  1.41344313
+ -0.92906451 -0.56305294 -0.67883451 -1.24320916  1.27076448  3.17134901
+ -3.44831237 -0.0703848  -0.93891902]
+    Min: -3.448312368940498
+    Max: 3.171349014365332
+    Mean: -0.013586093297487
+    Std: 1.425647829664948
+    Success! 33 CCFs, 5 modes
+    RV range: -3.448312368940498 to 3.171349014365332 m/s
+  Processing EXPRES...
+    CCF shape: (61, 110), eMJD range: 59336.304991 to 59420.287906
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 110 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (110,)
+    Values: [-1.18427938 -2.88122232  0.9402433  -1.20015101 -1.66689011  0.37654533
+  1.16634989 -1.16352721 -0.6101262   0.39668897 -1.01378836 -1.14348345
+ -2.0580387   1.61244663 -1.68217287  2.30108806  1.47321534  1.95647317
+ -1.23237319 -0.1405648  -1.90671777 -0.7609303  -2.61388972  3.0976608
+  0.8696829   0.16384872 -0.16278281 -1.63522318 -2.39735147 -1.71347306
+  1.98393909 -0.2915423   2.64816742 -0.12131998  0.67078585 -1.902011
+ -2.6147031   0.11624791  2.31718385 -0.69090489 -2.95497599 -0.59299946
+ -1.89885922  0.10820178  2.48143279  2.34597053  1.5340239   0.29025874
+ -0.18947347  0.0833358  -0.70341893  0.44046035 -0.22999076  2.84998553
+  1.39038764  0.61786861 -0.22481445  0.62105948 -2.72157094 -2.51465332
+  0.46042437 -0.66999715  1.73730799 -1.07801098  1.37391027 -1.23165373
+  0.83887525  1.96226083  0.46465018 -0.52495803 -0.14077034  1.07437328
+ -1.28933064  3.26786942 -1.80934113 -0.54867723 -1.64181714 -0.76102204
+ -1.60632388 -0.35674634  2.71567753 -0.13188015  0.47754084 -0.57966163
+  0.79824732  0.12699149 -0.59657939 -2.4445459  -0.0248295   3.59083207
+ -0.77625337 -0.2111618   1.91995425  0.76850811 -2.13037837  2.33982244
+ -3.95062138  3.71701213  2.10717287  1.51825291  0.90344975  3.27657668
+  0.63913343 -0.10849943 -1.72455104  0.86867214  1.34151569 -1.12632699
+  0.41952941 -1.14599969]
+    Min: -3.950621380897856
+    Max: 3.717012130383904
+    Mean: 0.019399564364028
+    Std: 1.627487272303040
+    Success! 110 CCFs, 5 modes
+    RV range: -3.950621380897856 to 3.717012130383904 m/s
+  Processing NEID...
+    CCF shape: (61, 90), eMJD range: 59332.207998 to 59420.195294
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.005, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 90 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (90,)
+    Values: [-0.23014754  1.73208198 -1.90953517  2.31002884  0.5569591  -0.33689536
+  0.07166092  1.45990854 -2.47607925  0.39528185  0.43778624  1.12545809
+ -0.23299896 -0.9920199  -0.2175514   1.11553329 -0.11704415 -0.87493574
+  0.39796514 -1.7501954   2.197767    1.35431668 -1.06390902 -2.54122705
+ -2.10325936 -0.15544019  1.02814714  1.21966849  0.8613843   1.94889191
+ -1.03948429  0.32568534 -0.17478078 -0.21379754  0.50871494  1.86479868
+  0.86143163  0.56176163  1.43019216 -0.71882764 -1.17981334 -0.19516733
+  0.16824813  1.09336715 -0.26343895  3.26345627  0.27911458 -0.64350582
+  1.27853038  1.32449863 -0.71934257 -3.67220709 -1.84108556 -0.64827902
+ -0.56597461  3.72766139 -0.65581671  0.02990949  0.87052182 -0.7942192
+ -0.82104855  1.0478159  -1.5337608   1.30883616 -1.5891217   0.30301938
+  0.28354411  1.84060247  1.37030745  0.19963855 -1.36943821 -0.53887902
+  1.12043474 -0.67842328  1.11774676  0.11311286  0.39220481  0.5851366
+  0.14041723 -2.17970677 -1.15061188 -1.14547913  1.34227128  0.65762801
+ -0.15889627 -0.9581523  -2.82900554 -0.6335333  -0.605587   -2.10233449]
+    Min: -3.672207086299450
+    Max: 3.727661385961464
+    Mean: 0.011138787974043
+    Std: 1.322558965311089
+    Success! 90 CCFs, 5 modes
+    RV range: -3.672207086299450 to 3.727661385961464 m/s
+Creating FIESTA plots for DS2...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS2_FIESTA_style.png
+
+Saving .dat files for DS2...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode5.dat
+Completed DS2
 
 ============================================================
 Processing Dataset 3
 ============================================================
 
 Loading pickle data for DS3...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS03_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS03_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS03_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS03_invCCF_neid.pkl
-No data found for DS3
+  harpsn: Loaded 96 CCFs
+  harps: Loaded 18 CCFs
+  expres: Loaded 122 CCFs
+  neid: Loaded 87 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS3_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 96), eMJD range: 59332.006941 to 59420.055097
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 96 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (96,)
+    Values: [-0.48638515  1.164687   -0.15031308 -0.44322657 -1.58854688  1.02679632
+  1.62610024 -1.03820829  0.04331928 -0.52391829  0.04449443 -2.64802637
+ -0.79556217 -2.90223031  1.89362726  1.83427208  1.59397065 -0.81470932
+  0.27960713  1.2747918  -2.14246944 -1.54369956  0.73742708  1.74141063
+ -1.32051518  1.83460247  0.05223616  2.56098268 -1.05561912 -2.77305403
+  0.20149217 -1.00384163  1.50460843  1.09679973  1.25820172  1.49280776
+  1.69465413 -0.56663229 -1.06305554  1.04478462 -1.3163713   2.21421868
+ -0.51108478  2.12429769  0.75171865 -3.56057022  1.31197814  1.62416945
+ -0.75141477 -0.26665365 -0.58917488  1.89280951 -1.76430281 -2.25651313
+ -1.35074776  3.5194946  -1.00717903  0.09068813  0.65857386 -0.13748864
+ -0.94688252 -1.58836475 -2.26028358  0.92498237 -0.35685602 -1.06376201
+  0.3836901   0.47025974  2.39283306 -1.8480188   0.49681928  0.21767094
+  0.41880449  0.6888447  -0.8652865   1.05926078 -0.86540532  1.33746944
+ -2.93653835 -1.9327097   2.46404697  0.2072676  -1.30164609  0.61867222
+  1.85730667  1.89851866 -0.8514351   0.83578493 -0.45912776 -0.98347295
+ -1.100034   -0.92677343 -0.09703131 -0.81165194  1.19421886 -0.00999738]
+    Min: -3.560570220662973
+    Max: 3.519494595051575
+    Mean: 0.000825849781285
+    Std: 1.441295944259057
+    Success! 96 CCFs, 5 modes
+    RV range: -3.560570220662973 to 3.519494595051575 m/s
+  Processing HARPS...
+    CCF shape: (61, 18), eMJD range: 59400.261026 to 59415.219886
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 18 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (18,)
+    Values: [-0.35895717 -2.36531371  4.09367118  1.04843773 -0.02462602 -1.53686336
+  0.94795863 -1.09117062  0.76795113 -2.89915576 -0.04308056  0.15648696
+ -0.69631631 -0.662888    1.6505876   3.82411418 -1.65141314 -0.90580987]
+    Min: -2.899155757351446
+    Max: 4.093671179045577
+    Mean: 0.014089605645399
+    Std: 1.808477033502389
+    Success! 18 CCFs, 5 modes
+    RV range: -2.899155757351446 to 4.093671179045577 m/s
+  Processing EXPRES...
+    CCF shape: (61, 122), eMJD range: 59336.400193 to 59420.325989
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 122 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (122,)
+    Values: [ 3.02700886 -1.4522105  -4.63439769  1.54890231 -1.11261143  0.68899022
+  2.74085772  2.37554494 -1.95955807 -4.08120859 -2.28159627  0.28536931
+ -0.20583298  0.48581734 -2.10911252  0.44228488 -1.77770639 -0.9858173
+ -2.64409183 -1.3982569  -1.44085409  2.47976991  1.98441235 -0.18172558
+ -0.92511404 -1.22734296 -0.06583758  0.5808304  -2.69988057  1.49228863
+ -0.10305095  0.75208798  1.52736997  0.71023026  0.56274963 -2.65074605
+  1.44929914 -0.35429939 -1.01403271  0.12084837 -0.97551908 -0.48503274
+  2.34213228  0.34992763  1.57359388  3.32331958 -0.8960841  -1.87932103
+  2.1716791   0.3972135   1.59839462  1.20431575 -1.81690458  0.41322016
+ -0.16714258  1.01684673  1.49046922  0.0076887   0.85723353  1.18130208
+ -0.31921523  1.48021231 -4.98358206 -0.70144302  3.77183673 -0.62970462
+ -2.65420315 -1.31433387 -0.7381279   0.08954622  1.2693396   0.70511734
+ -1.68931534 -0.55911845  1.08037391 -0.11005964  1.31390033 -1.74659919
+ -1.29439823  0.98257787 -3.07295948  0.12802825  1.47240388  1.23700929
+  0.20859862  1.49506689  0.9318526   0.25301123  1.92818696 -0.04905211
+  0.33724492  2.14791625 -1.77245962  0.76959916  0.29296664 -1.31829657
+ -1.07364123 -0.18022649  0.69967909  0.5445816  -1.03516634  4.0279703
+ -0.11639437  4.88090513  0.72981112 -0.54663515 -2.39883278  1.33335836
+  0.87075422  0.24635096  0.80260846  0.74509837  0.33274696 -3.0260526
+ -1.57652699 -1.94610455 -1.60139752  2.19026509 -2.00607572  0.50481561
+ -0.74918443 -0.18976867]
+    Min: -4.983582062662709
+    Max: 4.880905128567314
+    Mean: 0.000504667025050
+    Std: 1.697968972312104
+    Success! 122 CCFs, 5 modes
+    RV range: -4.983582062662709 to 4.880905128567314 m/s
+  Processing NEID...
+    CCF shape: (61, 87), eMJD range: 59332.306663 to 59420.355373
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.005, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 87 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (87,)
+    Values: [ 3.54592172  0.06785488 -0.24945611 -2.33559346  0.40540668 -0.16818345
+  0.65328996 -0.18158801 -1.30935248  0.52984229  3.57382025 -2.22888693
+  1.53107701 -0.2289016   0.29239858  1.21705241  1.00701854  0.78527928
+ -2.13671028 -0.84811918 -1.74422644  1.07831772  1.75896534  3.67146345
+  1.18474117 -1.10660221 -2.20883654 -1.0035366   1.94454611 -0.52599496
+ -0.06917721 -1.43959274  0.96019976 -0.7368933   0.77755591  2.70336745
+ -2.41045061 -1.90825486 -0.47159788  0.07464109  0.06774677 -3.33970244
+ -0.43076655 -0.62058721  0.07633254  1.48048776 -1.48957045  0.90552756
+  2.0525696   2.3320258  -2.12326608  2.41182434  0.43978109  1.02209089
+ -0.59347275  1.17326559 -0.18301258  0.07836425  1.03294452 -0.19600963
+ -0.41704339  0.53651709 -0.7654522  -0.07721657 -0.61465971  2.37049175
+ -0.26384762  0.72420843  0.587822   -0.34867551 -1.71020863 -0.30445804
+ -2.66040345  0.90812215  0.01067873 -2.31538295  0.1754137   1.34969142
+ -2.58614079  1.26364204  0.05103788 -2.44740617 -1.37208224  0.02136367
+ -1.66280527  1.79979688  0.30247851]
+    Min: -3.339702438048695
+    Max: 3.671463452321042
+    Mean: 0.012676545406816
+    Std: 1.490925529873667
+    Success! 87 CCFs, 5 modes
+    RV range: -3.339702438048695 to 3.671463452321042 m/s
+Creating FIESTA plots for DS3...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS3_FIESTA_style.png
+
+Saving .dat files for DS3...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode5.dat
+Completed DS3
 
 ============================================================
 Processing Dataset 4
 ============================================================
 
 Loading pickle data for DS4...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS04_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS04_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS04_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS04_invCCF_neid.pkl
-No data found for DS4
+  harpsn: Loaded 84 CCFs
+  harps: Loaded 24 CCFs
+  expres: Loaded 93 CCFs
+  neid: Loaded 78 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS4_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 84), eMJD range: 59332.426929 to 59424.415942
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.460, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.460 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (84,)
+    Values: [-2.91502595 -0.30321716  2.44308884  0.3897698  -2.79965266 -2.20391615
+ -1.99262398 -2.26677103 -2.06992811 -2.11910344 -1.22463232 -2.19831617
+ -1.86093593 -0.85441354 -1.8463468  -0.82701677 -1.80856818 -0.74983305
+  0.99477851  1.97870802 -3.33559215 -0.43112469  0.04626207 -1.42304142
+  5.60540429 -1.48231449  5.94332108  5.55519026 -3.54748155 -1.59312865
+ -0.65096558 -1.04558649 -2.14681611 -1.22232249  5.14252559 -0.33725234
+  1.80011564 -0.6052877  -1.64203721 -1.54089752 -2.39603466 -2.42679405
+ -0.68772401  2.13204563  3.87041281 -1.32382622  6.81636414 -3.50278464
+ -1.31423117 -2.09316192 -1.0743875  -2.08651661 -0.37637068  3.06822531
+ -0.73549469  5.79727236 -1.73787072  2.08343305 -1.2464352   1.76176738
+ -0.89213631  2.56912599 -1.11120485  0.37961875  4.7365117  -1.4253658
+  2.83575082  0.19030228  1.00530669  1.38779552  2.11954809 -2.48813117
+ -0.41673255  5.42124339 -2.55722478 -1.86108358  0.1503968  -2.26565648
+ -1.17973054  4.0162361   5.96972394  1.15672428  0.27170698 -2.50534829]
+    Min: -3.547481553323906
+    Max: 6.816364142918252
+    Mean: 0.010598572059422
+    Std: 2.581340611655746
+    Success! 84 CCFs, 5 modes
+    RV range: -3.547481553323906 to 6.816364142918252 m/s
+  Processing HARPS...
+    CCF shape: (61, 24), eMJD range: 59400.711146 to 59423.697202
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.565, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.565 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 24 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (24,)
+    Values: [-0.18133386 -1.24703963  2.95015322  0.06076714  0.03531014 -1.32135242
+ -2.30637558  3.03893727  1.57570693 -0.69969217  0.96527395  0.42902881
+  0.39183645 -0.75498418 -1.35886857  1.37848497 -1.84258418 -0.8856957
+  0.14709784 -0.21097487  0.49344838  0.16848692  0.28036268 -0.96044022]
+    Min: -2.306375576689668
+    Max: 3.038937271534592
+    Mean: 0.006064721296879
+    Std: 1.301811279196126
+    Success! 24 CCFs, 5 modes
+    RV range: -2.306375576689668 to 3.038937271534592 m/s
+  Processing EXPRES...
+    CCF shape: (61, 93), eMJD range: 59336.729598 to 59421.812232
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.093, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.093 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 93 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (93,)
+    Values: [-0.91784281  4.57708982 -1.07218952 -0.1464656  -0.36306582 -0.72908269
+ -0.53642523  2.78124013 -3.05151386  3.3324038  -0.34997214  5.21399192
+ -4.44158987  1.83252521  3.6733523  -1.84865637  6.40383753 -2.11351848
+ -2.62767391 -1.79550289  0.03866446  2.8630969  -3.83466013  0.5441669
+  1.21291484 -2.16695653  5.36894861 -1.51573014 -2.9047675  -1.33175534
+  5.62576817 -0.37455909  2.77466058 -1.82934828  2.41374513  1.13155659
+ -3.10463966 -3.8111918  -1.25393304 -2.95303953  0.24861141  7.70813657
+  2.11683673  3.07103377 -3.04252949 -1.8852457  -2.81741518 -3.17967092
+ -1.95286916 -0.88106463 -2.23588179  4.01950503  5.12066012 -4.03732648
+ -2.01700096 -1.35487144 -2.93840556  4.88140178  1.8398913   3.4830426
+  2.23894993 -2.45031935  0.11143236  2.87275159 -0.95797118 -1.1366029
+  0.36255336 -2.92517764 -1.92280351 -2.65212739 -2.26064815  0.24308457
+  0.01902026 -2.15248962 -2.29907787  6.50993175  0.56446898 -3.15832983
+ -1.91003794 -2.36920728 -1.83663921  4.71923023 -0.37480296 -1.12165287
+  0.48959215  1.26307119 -2.48355797 -0.77163232  0.41237093 -3.24649381
+ -2.67919782  6.16852789  2.21858966]
+    Min: -4.441589865428419
+    Max: 7.708136567902494
+    Mean: 0.003715332362821
+    Std: 2.879120742018435
+    Success! 93 CCFs, 5 modes
+    RV range: -4.441589865428419 to 7.708136567902494 m/s
+  Processing NEID...
+    CCF shape: (61, 78), eMJD range: 59332.690415 to 59421.804826
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.005, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.080, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.080 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 78 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (78,)
+    Values: [ 6.7495511   0.94102598  4.66265732  0.16804377 -1.95269502 -2.04532447
+ -2.03619824 -1.04429852  2.06965066 -2.62826407  1.51374124 -2.23405409
+  3.88875898 -4.08427399 -4.04601125  1.09512117 -2.28593777 -0.76953274
+ -1.33924088  1.78126764 -1.23297819  7.31662247 -3.03379941  0.34308039
+ -1.52166396 -1.94032977 -2.22872025  0.61283788 -2.35307009 -0.53830153
+  0.21458519  3.11795564 -1.79100092 -0.70693059 -0.87974198  2.68359142
+ -0.22681707  0.63810387 -4.52096619 -1.02013407 -0.75001812 -2.1891985
+ -0.46224248  6.104359    3.00688187  2.73558382  0.33175478 -1.2515475
+ -0.14035903  0.25778993  5.17853351  1.78099849  3.73257612 -3.48255654
+ -1.40405342 -3.08950607  5.10398829  2.34738291 -2.30152395 -3.63381499
+ -0.49758321 -2.81831008 -0.78153715  0.98232498 -0.05023686 -2.59386416
+ -1.00853778  0.73523443 -0.11219858 -0.56551487  5.20130234  2.99707607
+  0.96654873  1.09665261 -0.27083528 -4.85388358  0.37553423  2.59148593]
+    Min: -4.853883583764721
+    Max: 7.316622468451675
+    Mean: 0.059038404684683
+    Std: 2.656908276567800
+    Success! 78 CCFs, 5 modes
+    RV range: -4.853883583764721 to 7.316622468451675 m/s
+Creating FIESTA plots for DS4...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS4_FIESTA_style.png
+
+Saving .dat files for DS4...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode5.dat
+Completed DS4
 
 ============================================================
 Processing Dataset 5
 ============================================================
 
 Loading pickle data for DS5...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS05_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS05_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS05_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS05_invCCF_neid.pkl
-No data found for DS5
+  harpsn: Loaded 84 CCFs
+  harps: Loaded 21 CCFs
+  expres: Loaded 100 CCFs
+  neid: Loaded 75 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS5_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 84), eMJD range: 59334.700184 to 59423.689751
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (84,)
+    Values: [-0.29038354 -0.80695607  0.84862124  2.78006419  0.80035372  0.23324397
+ -3.4193081   1.2261611  -0.39745595  1.64423428  0.65345409  0.81250147
+  1.11176033  0.72772681 -2.81018869 -3.25688465  0.38954212 -2.35355032
+  0.91841975  2.4551836   1.30843462  0.34375058  1.53460353  1.45298309
+  3.12071049  1.7152145  -0.13653405  2.62511259  1.43189486  1.64376782
+  0.69329866 -4.08675661  3.16622818 -1.61728749 -1.14343161 -1.76106942
+ -0.76290219  2.23832057  0.76972586  1.31168493  1.016788   -0.03721238
+ -0.6709969  -0.53671595 -3.35986718  0.80850692  0.74177998  1.20099221
+  0.35950741  0.96497322  0.71603391  0.68561971 -0.17688803  0.05261049
+  0.46404903  0.1560996  -1.84674931  0.52463554  2.39469155 -2.0896361
+ -0.49326931 -2.85222948  1.98032138  0.16266004 -1.60639404 -1.71136113
+  0.02272509  1.57399719  1.52391891  0.44454029  0.78706125 -1.0749824
+ -1.68684785 -1.62351932 -1.05407408  0.63243124 -2.03520908  0.56522893
+ -1.21684986 -1.94740829 -4.75579173 -1.12835411 -2.44514917  1.00954874]
+    Min: -4.755791729738446
+    Max: 3.166228184440900
+    Mean: -0.005315437984478
+    Std: 1.678527524379468
+    Success! 84 CCFs, 5 modes
+    RV range: -4.755791729738446 to 3.166228184440900 m/s
+  Processing HARPS...
+    CCF shape: (61, 21), eMJD range: 59401.927059 to 59422.874376
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.570, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.570 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 21 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (21,)
+    Values: [-2.94102495e+00  1.27716434e-01 -4.03723169e-01 -4.53907400e-01
+  1.35862669e-04  3.01312816e+00 -6.88757817e-01 -1.82951762e-01
+  9.49255776e-01  1.12814802e+00  1.71929778e+00  9.97707949e-01
+  1.59740682e+00  1.68726162e+00 -3.04342474e+00 -9.28071280e-01
+ -3.29716517e+00 -4.56613029e+00  1.75365508e+00 -2.15999457e+00
+  2.64400604e+00]
+    Min: -4.566130292915638
+    Max: 3.013128156009404
+    Mean: -0.145115791627486
+    Std: 2.026955832665889
+    Success! 21 CCFs, 5 modes
+    RV range: -4.566130292915638 to 3.013128156009404 m/s
+  Processing EXPRES...
+    CCF shape: (61, 100), eMJD range: 59336.087932 to 59421.136709
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 100 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (100,)
+    Values: [ 2.79604979  3.32176164 -3.07255854 -0.32648969  2.66271837  0.78979117
+ -2.28201984 -2.16596757  3.67162923 -3.38424287 -1.75701569  1.4698151
+ -4.60118384 -2.45727308 -3.41109093 -2.32347733 -3.46978113  1.97805242
+  2.7093908   2.01953289 -3.18319735  3.84365767  1.71434244  0.91748309
+  2.49424425  1.66187117 -2.81269617  0.75897573 -2.06309355  1.37238577
+  1.12690853  1.1758448  -2.01697238 -0.10630593 -2.10375927 -1.76693392
+  4.65473643 -1.22434158  0.92312266 -0.71788314 -1.78823325 -2.71605928
+ -3.42891601  2.82066389  1.7430044  -4.51538646  0.84871314  1.69353912
+  3.24415584  0.23332664  2.70365073  0.34426072  2.00166766 -0.32001411
+  0.10327712 -2.98170933  1.80093321  1.60202704  1.32987797  2.55428335
+  1.35180259 -2.40563105  2.30678293 -2.03884752  1.30151423 -2.48555701
+ -1.25818277 -1.97773381  2.18249194  1.95624073  0.63487365  3.80039192
+  2.0713993  -2.3741797   1.37264398  0.77260701  2.15221177  3.5589581
+  1.11556417 -2.10608427 -3.11559038  0.44415243  0.07393995  0.95782208
+  1.48143287  1.53321583 -4.17454705  3.71620324 -3.25837776 -2.00869221
+  1.75991706 -2.9309115  -2.71595635 -0.83338586 -4.12006516 -1.64831647
+ -3.14237823  2.43602515 -2.59426561  2.21699191]
+    Min: -4.601183842090101
+    Max: 4.654736428586478
+    Mean: -0.019024273687281
+    Std: 2.363797296607066
+    Success! 100 CCFs, 5 modes
+    RV range: -4.601183842090101 to 4.654736428586478 m/s
+  Processing NEID...
+    CCF shape: (61, 75), eMJD range: 59334.934601 to 59420.991383
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.078, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.078 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 75 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (75,)
+    Values: [ 0.98500099 -1.39241772  1.26981314 -2.34145305 -0.41193651  1.31677706
+  0.25501821  3.03703078  0.27135738 -3.0458542  -2.23980478  2.71005258
+ -2.13482402  0.62263989 -3.25606548 -0.44364849 -0.03342496 -0.02774799
+  1.36253274  1.9765366   1.27682602  2.86675125 -0.94785998 -0.31423843
+ -0.05865707 -0.29756654 -0.9366638  -1.20827617 -2.85033454  0.54031322
+ -3.24638072 -0.25194527  0.53447143  1.93867344  1.56303212 -1.23996352
+  2.4519715   1.23601452 -3.91066718  1.5273967   3.622744    2.74092785
+  2.58086009  0.84746763  2.06361089 -2.16692618 -0.45093263 -2.01266206
+  1.54425358 -2.59930194 -0.69875705 -1.00023187 -0.79247718  1.84385158
+  1.50116181  1.85160929  3.22020943 -1.91288818 -1.1624343  -1.06192566
+  2.06337547  1.87915422 -0.05833696 -0.34248906  1.51057981  2.26354572
+  0.6292144   1.76339358  0.38214568 -2.28990962 -2.08796131 -2.85241582
+ -0.48924733 -2.44338617 -2.14251937]
+    Min: -3.910667180756389
+    Max: 3.622744003437331
+    Mean: 0.038610419877472
+    Std: 1.845236639382674
+    Success! 75 CCFs, 5 modes
+    RV range: -3.910667180756389 to 3.622744003437331 m/s
+Creating FIESTA plots for DS5...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS5_FIESTA_style.png
+
+Saving .dat files for DS5...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode5.dat
+Completed DS5
 
 ============================================================
 Processing Dataset 6
 ============================================================
 
 Loading pickle data for DS6...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS06_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS06_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS06_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS06_invCCF_neid.pkl
-No data found for DS6
+  harpsn: Loaded 90 CCFs
+  harps: Loaded 27 CCFs
+  expres: Loaded 111 CCFs
+  neid: Loaded 93 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS6_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 90), eMJD range: 59333.415568 to 59420.314375
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 90 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (90,)
+    Values: [ 0.38852424  0.52745706  0.54083705  0.93821799  0.08164902 -0.95601843
+ -1.72402318  1.28983503  0.55028406  2.1499974  -0.61170695  2.5386155
+  3.65329769  1.32542627  0.57400842  3.47596437  0.6487376   2.01324648
+ -2.67887632  1.26743813 -0.87043906  2.29885644  0.21725788 -2.04628384
+  2.17722036 -2.74445804 -3.13407708  1.83183842 -1.54154346  0.88812625
+  1.96604927  2.1954509  -1.37919062  1.33710754 -3.9130276   1.83523631
+ -1.14653108  1.39985709 -0.6782762  -4.04407486 -1.34771562  1.55082307
+ -1.20595009 -2.76274595  2.19608916 -0.64985847  2.59237207 -3.10264127
+  0.2821984   2.35460928  1.39734236  1.20413077 -0.37586404  0.24772558
+  1.713537   -3.33620853  4.42204489 -2.7145117   2.30642401  1.72989124
+ -0.97713151 -4.80915503 -1.82495435 -2.64090277 -2.26184821  1.17674009
+  1.19793176  0.045054   -3.51159794 -0.85633115 -4.12113251 -1.98941836
+  0.4186179   1.20445006  1.59962471 -1.34773462 -2.58462194 -1.02869615
+ -0.34537428 -0.93307559  2.17321261  1.66520172 -2.18367157  1.32648054
+ -1.43241938 -1.24404455 -0.20591273  0.73725789  0.61020664  5.27375622]
+    Min: -4.809155032565904
+    Max: 5.273756215759207
+    Mean: 0.003046819469271
+    Std: 2.056415600904557
+    Success! 90 CCFs, 5 modes
+    RV range: -4.809155032565904 to 5.273756215759207 m/s
+  Processing HARPS...
+    CCF shape: (61, 27), eMJD range: 59396.579107 to 59414.563371
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.568, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.568 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 27 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (27,)
+    Values: [-2.34251245  2.92704062 -2.89689047  3.89365949  1.84875497  2.26768898
+  0.72704913  0.00592335  0.34296658  1.04320685 -4.80457896 -1.0973223
+  2.22995706 -2.0151838  -1.49706252  0.27233652  0.36447588  1.82840674
+  1.22530312 -2.64809103 -4.05789697  2.17909677  2.05301252 -0.80621031
+  1.61220275 -2.80835353 -1.390938  ]
+    Min: -4.804578957677719
+    Max: 3.893659488457546
+    Mean: -0.057183667180981
+    Std: 2.227283958145464
+    Success! 27 CCFs, 5 modes
+    RV range: -4.804578957677719 to 3.893659488457546 m/s
+  Processing EXPRES...
+    CCF shape: (61, 111), eMJD range: 59336.758799 to 59420.753027
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.476, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 111 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (111,)
+    Values: [-1.82543532  4.53564299 -0.02908274  2.69731997  3.62639578 -2.72178113
+ -3.43579402 -1.26469623 -0.01260875  2.66417029 -4.49380149 -2.30690693
+  2.22643225  4.24558516 -2.73369897  0.95790675  2.91520655  2.87536275
+  4.00587959 -1.12322678 -1.31351275 -2.98856724 -1.90860036 -2.66144525
+ -0.00554732  2.21744095 -0.8933455  -1.96098853  1.12442215 -1.37290543
+  2.58586743  0.21475913  0.23763212  1.95713536 -1.99289941 -1.31731217
+  4.07906559 -0.71158657  0.13176679 -3.59840383  0.65731972  1.98233552
+  0.75175073  1.9314639   2.04013285 -1.13224767  1.21291995  1.11429064
+  4.90759028 -0.60038697 -0.0472841   3.8097546  -3.50650084  1.31371519
+  2.28136488  0.93296594 -2.11878976 -0.36673584 -1.72357698 -1.28321657
+ -1.55328313 -4.41310353 -2.03713014 -4.16855735 -2.93188431  0.76674841
+  1.04701623  1.16454115 -2.28605307  2.14566858  2.31724559 -3.40986319
+  1.38766719  0.38594821  0.85494417 -0.265678    0.80665009  0.45179638
+ -2.19613005  1.42376015  2.0651654   1.30639643 -2.36023786  2.28847106
+  1.81111628  2.13980598 -2.32889725  2.88072205  0.04536411 -4.72486041
+  2.34698717  0.91053406 -3.00208615 -1.66288862 -1.97664482 -0.53155329
+ -3.51126555  3.54106128 -2.38168072  4.04153936 -0.91904194 -0.12879266
+  0.11467343  0.50066077 -1.76423501  0.27681734 -0.07883698  0.88087242
+  1.68162468 -0.68491276 -2.39138523]
+    Min: -4.724860411370033
+    Max: 4.907590283494509
+    Mean: 0.023941498400057
+    Std: 2.256567004747358
+    Success! 111 CCFs, 5 modes
+    RV range: -4.724860411370033 to 4.907590283494509 m/s
+  Processing NEID...
+    CCF shape: (61, 93), eMJD range: 59336.743932 to 59420.656469
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 93 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (93,)
+    Values: [-3.51710793 -4.05353707  2.42706435 -1.96612151 -0.95563449  0.09281112
+  1.55227706 -1.56624606 -1.34627527 -2.60816835  1.68007988  0.4836927
+ -2.74378247  1.43636736  0.37330751  0.44991843 -1.29922404 -2.78609989
+ -0.34967152  1.76588842  1.11581928 -2.75721759  2.37173409  0.9988203
+  2.25629655 -0.81898883 -1.3258538   1.64094875 -1.8921952  -1.78946426
+  0.7115671  -2.66339347  0.08275255 -1.9560157  -1.73693454 -1.61138575
+ -1.77341176  4.93794311  3.12373374 -0.70229904  1.02992396 -1.58816197
+ -1.77951249 -1.26075308  0.75318716  2.14671363  1.01511789 -0.62836149
+ -1.26445286 -2.5307248   0.0171963   2.34555864 -4.31206468 -0.51857369
+  2.8694064   2.03381197  2.25383093 -1.97521228  1.08202525 -3.28134139
+ -0.11771736  3.51479894  2.93724658 -2.66011026  1.11462397  2.27653833
+  1.7879289   1.44104552 -0.95485661 -1.56479818  0.82673558 -1.93758482
+ -1.02181343  2.1544097   2.27466483 -3.22980959  0.46769123  2.55698392
+  2.28469084  1.10607352 -1.73978488  0.17288016 -1.78880847 -1.3616705
+  1.55648989 -0.96981449 -0.98987826 -0.47308385  3.51980737  1.31747905
+ -0.51442552  0.37225707  1.85669953]
+    Min: -4.312064682903530
+    Max: 4.937943105378401
+    Mean: -0.044037678655711
+    Std: 1.964900082046598
+    Success! 93 CCFs, 5 modes
+    RV range: -4.312064682903530 to 4.937943105378401 m/s
+Creating FIESTA plots for DS6...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS6_FIESTA_style.png
+
+Saving .dat files for DS6...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode5.dat
+Completed DS6
 
 ============================================================
 Processing Dataset 7
 ============================================================
 
 Loading pickle data for DS7...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS07_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS07_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS07_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS07_invCCF_neid.pkl
-No data found for DS7
+  harpsn: Loaded 78 CCFs
+  harps: Loaded 24 CCFs
+  expres: Loaded 104 CCFs
+  neid: Loaded 84 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS7_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 78), eMJD range: 59333.584825 to 59416.600384
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 78 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (78,)
+    Values: [-2.63611871 -0.30986297  0.5703623  -1.47714485  0.85686362 -1.71949916
+ -0.72804241 -1.20586556 -0.04981827 -1.88370128 -0.25870956 -0.26222234
+  0.68166129  1.91448886  1.00244366 -1.28181353 -0.75998124 -0.66061514
+ -0.39831289  2.35115766  2.50339382 -3.65629214  0.65031745 -2.28354268
+ -1.32715724  1.60747275 -1.33661386  1.91042251  1.64892312  1.83185787
+  1.39732054  0.68204241  2.51785686 -2.18515802  1.58667963  1.20101354
+ -2.57142162 -2.41571706  1.71961009  0.86529698 -0.48501637 -3.75416128
+  0.66192862  1.58577833 -0.05039432  3.41095157  1.37628543 -1.44296838
+ -0.75778071 -0.57134925  1.23539724 -0.50814555 -2.2762791   2.22866552
+ -0.10464236  0.54382419 -0.52662106  4.15904778  2.18301515 -1.99545464
+  2.23308296 -3.20189081  1.8959641  -3.12899164 -3.02618149  1.45315108
+  2.25058364  0.03680157  3.22405144  0.18940591 -1.24125889 -3.04058315
+  3.06564338  1.42655444 -0.76191521 -0.89405367 -0.26404524  2.16184366]
+    Min: -3.754161277430557
+    Max: 4.159047783303727
+    Mean: 0.068997657962800
+    Std: 1.835848526404187
+    Success! 78 CCFs, 5 modes
+    RV range: -3.754161277430557 to 4.159047783303727 m/s
+  Processing HARPS...
+    CCF shape: (61, 24), eMJD range: 59395.820428 to 59411.783730
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.601, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 24 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (24,)
+    Values: [ 2.03905401 -2.5067029  -3.0612251  -1.13040379 -0.63158296 -2.47317624
+ -0.88013633 -1.71827156 -1.03074218  1.25783924  0.86287707 -0.28780926
+ -1.39268035  2.90798809  2.34112222 -1.75277337  1.15407475 -1.64590203
+  2.13802413  0.74783629  0.24784369  2.21441216  0.69801099  1.72022605]
+    Min: -3.061225104108334
+    Max: 2.907988085683266
+    Mean: -0.007587392129906
+    Std: 1.724035476097522
+    Success! 24 CCFs, 5 modes
+    RV range: -3.061225104108334 to 2.907988085683266 m/s
+  Processing EXPRES...
+    CCF shape: (61, 104), eMJD range: 59335.858004 to 59418.799316
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 104 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (104,)
+    Values: [-8.90412261e-01  6.52461398e-01  2.02329575e-01  1.58680100e+00
+  1.20097538e+00  9.64878493e-01 -1.18081466e+00 -1.71553219e+00
+  5.04784541e-01 -1.57102012e+00 -3.30478407e+00 -2.00915899e+00
+ -4.26733067e+00  6.98632986e-01 -2.07343090e+00  2.59459711e+00
+  2.69525774e+00  3.19952701e+00  4.42992892e-02 -7.59163341e-01
+ -2.47277470e-01  1.68358355e-01  1.16643986e+00 -2.19110447e+00
+ -2.34846984e+00 -8.38558732e-01  2.39186362e+00  7.17953943e-01
+ -1.19194459e+00  3.88341540e-01  1.63736877e+00  4.74922585e-01
+ -1.13835339e+00  1.48353870e+00  3.90770387e-01  2.75487531e-01
+ -3.35151278e-01 -2.77173229e+00  2.82418735e+00 -9.98041660e-01
+  4.63908549e-01 -7.84769958e-01  4.52671589e-01  3.45353734e+00
+ -6.62494393e-01  8.64029904e-02  2.34644801e+00 -8.27775304e-02
+ -2.58763155e+00  1.78163197e+00 -5.45572325e-01  1.95362203e+00
+ -2.24704497e+00  9.84459888e-02  1.72548956e-01  1.18212289e+00
+  8.65104353e-01 -1.85649042e+00 -1.71891975e+00 -3.64247796e-01
+  1.67941238e+00  2.11112013e-01 -1.06452431e+00 -1.36545754e+00
+ -2.17897113e+00 -4.30543302e-01 -7.88624598e-01 -1.69307990e+00
+ -1.22681224e+00  8.46065652e-01 -8.09503127e-01  2.22040106e+00
+  2.10346982e+00  2.98458290e+00  3.52783556e-01  2.52387659e-01
+ -1.13893533e+00  7.26172466e-01  2.82199213e+00  3.67520749e-02
+ -7.68099218e-01  4.59452851e-01  1.34050274e+00 -9.31643250e-01
+ -5.78152589e-01 -4.29432782e-01 -1.66301041e+00  6.98881098e-01
+  4.65447730e-01  1.26254782e+00  1.18856643e+00 -3.77915371e+00
+ -1.61487531e+00 -1.14180609e-01 -3.50785290e-01 -6.21236191e-04
+  4.02624198e-01  1.71399340e+00  7.18125106e-01  1.08292297e+00
+  2.09386676e+00 -7.13031631e-01  3.37996778e-01  2.27633989e-01]
+    Min: -4.267330668455124
+    Max: 3.453537335045664
+    Mean: 0.029098541016876
+    Std: 1.547258743294599
+    Success! 104 CCFs, 5 modes
+    RV range: -4.267330668455124 to 3.453537335045664 m/s
+  Processing NEID...
+    CCF shape: (61, 84), eMJD range: 59334.835761 to 59418.868144
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (84,)
+    Values: [ 1.83501656  1.40489743 -0.90735099  0.30348324  1.05679306  0.53441031
+  0.93856262 -0.3432855  -0.93855025 -2.93146279  0.42789946 -0.47609751
+ -2.61876175 -1.64311404  1.02787911  0.56379725 -1.36680924  1.22084627
+  3.91945247 -0.86265816  0.8347469  -0.71199717 -0.66072879 -0.71684964
+  0.41616721 -1.27839674 -1.09612248  1.3204807   0.34282908  2.33683246
+ -1.12618148  1.43849246 -1.48443959 -1.30131844  0.71144391  0.24687647
+  3.51336338  0.32291864 -1.74716275 -2.20509918  2.8802766  -1.39994025
+ -2.15853299  2.94311241 -2.45738729  0.54370831 -0.53330844 -0.40403261
+ -1.07466753 -0.6316364  -0.33107625 -1.39308335  2.67557726 -0.88246803
+  0.27459374  2.14316252 -0.02337884  0.37970295 -1.85047194  0.89292016
+  3.49374512 -0.36599004 -1.58530389  1.65376246  2.71946365 -1.47122825
+ -1.33533307 -0.57233812  0.27717639  0.58390363  0.64603868  0.25130588
+  0.20296289 -2.02445013  0.45544148 -3.06328313  0.20896392 -0.5723624
+ -1.39056791  0.76379742 -2.8977106  -0.69783107  1.45208165  3.21743676]
+    Min: -3.063283127418714
+    Max: 3.919452471074392
+    Mean: -0.001862454427396
+    Std: 1.576026617200987
+    Success! 84 CCFs, 5 modes
+    RV range: -3.063283127418714 to 3.919452471074392 m/s
+Creating FIESTA plots for DS7...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS7_FIESTA_style.png
+
+Saving .dat files for DS7...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode5.dat
+Completed DS7
 
 ============================================================
 Processing Dataset 8
 ============================================================
 
 Loading pickle data for DS8...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS08_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS08_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS08_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS08_invCCF_neid.pkl
-No data found for DS8
+  harpsn: Loaded 87 CCFs
+  harps: Loaded 30 CCFs
+  expres: Loaded 114 CCFs
+  neid: Loaded 93 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS8_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 87), eMJD range: 59332.340853 to 59422.503487
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.584, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.454, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.454 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 87 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (87,)
+    Values: [ 4.16262026 -2.79859921  1.66508375  5.10375627  6.33978936 -1.98764164
+ -3.0624631  -3.33067028  0.12037166 -0.07363438 -1.03265051 -4.1817087
+ -3.55749504  6.29462104 -2.85043718  5.69075781  2.72021343 -2.19524814
+ -2.88342319 -1.30921849 -0.24321867  1.11412356 -4.02492893 -3.68370798
+ -0.38084579  1.79032067 -2.58594918 -2.24211907 -0.94787121  3.36971624
+  2.43384282 -2.88740768 -4.94808188  7.62536236  7.82881703 -1.96734859
+ -1.96700926 -2.10298526 -4.70945626 -2.24904148 -2.82762687  0.3553629
+  8.63591132 -0.61407351 -3.70755811 -2.69099816 -1.37756855 -1.03063207
+ -3.627084    2.84377054  7.6515271  -2.99065965 -0.17040783  1.96556295
+ -3.21659197 -2.86591922 -4.78863776 -2.5072405   2.63744724 -4.61872138
+ -3.43149802 -3.79547876  1.1982954   0.20093126 -1.57562002 -1.07712001
+ -3.51677436  1.56220598 -1.31043625  3.25266255 -1.78465197  6.41714612
+  6.79761667  9.26624096  3.32411399 -1.69591949 -2.73043051 -1.73681865
+  6.62944451 -2.9642122   8.34704989 -3.53168328  0.9440006   2.73651644
+  4.11670232 -1.25657095 -3.21980702]
+    Min: -4.948081878429766
+    Max: 9.266240961700978
+    Mean: 0.003195433936731
+    Std: 3.737478373647072
+    Success! 87 CCFs, 5 modes
+    RV range: -4.948081878429766 to 9.266240961700978 m/s
+  Processing HARPS...
+    CCF shape: (61, 30), eMJD range: 59396.554028 to 59422.586241
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.599, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.558, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.558 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 30 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (30,)
+    Values: [ 2.46090921  0.04160461 -1.50995121  0.39145956  1.36893307  0.43909229
+ -1.49233147  1.17917121 -4.86052649  0.97908416 -2.42787792 -0.62043481
+  1.76489035  1.60263581  0.22858284  1.39846766 -0.43390075 -1.16247822
+ -0.1826402  -0.54560321 -0.27542104  1.23442401  2.99847079 -1.01101524
+  0.77102267  1.35156575 -1.5154758  -0.5311489  -0.00605925  0.51114855]
+    Min: -4.860526491303641
+    Max: 2.998470792754726
+    Mean: 0.071553267662642
+    Std: 1.541864467608365
+    Success! 30 CCFs, 5 modes
+    RV range: -4.860526491303641 to 2.998470792754726 m/s
+  Processing EXPRES...
+    CCF shape: (61, 114), eMJD range: 59338.753053 to 59422.796142
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.006, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.099, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.099 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 114 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (114,)
+    Values: [-3.34867469  9.00470425  4.83098243  0.08936012 -2.30717055 -2.77142499
+  3.91782178 -1.66286177 -1.49617929 -3.64410173 -3.00310553  5.2448258
+  1.84623279 -2.32719586  9.57502592 -0.67051737  6.71527045 -2.37244191
+ -1.1827092  -2.06809959 -3.83712725 -2.59920264 -4.3704201  -3.63296151
+ -3.67572234 -0.01619389  5.90533975  5.98266105 -2.6771925   5.34664338
+  4.31114346 -3.85309206 -1.67026236 -2.8692814  -2.66903374  5.63111668
+ -1.046165   -2.16115881 -5.02928592  6.66725673 -2.8634626   5.32402843
+ -1.33398162 -2.13976457 -6.22075008 -2.55930361  5.36064696 -4.52395173
+ -5.74633581 -4.58209176  4.59885093 -4.0579066   4.84019644 -1.10038723
+ -1.63079236  5.60292587 -3.72494322  2.78348515 -3.084378   -2.11487367
+ -1.91739262 -1.74897867 -4.52117558 10.07698848 -2.72556215  0.68053743
+ -1.50660699  4.71001315 -1.74688252  0.25600541 -2.63897098  4.25534202
+ -1.6529955  -1.81270291  5.06363412  4.30284412  5.11179904  5.98992361
+  4.77043645 -1.94757936 -1.53901325 -2.30896511  4.73050173 -2.7223861
+ -4.16409102 -3.50394662 -1.612582   -4.57700475  3.15929168  0.52173239
+ -0.97922268 -2.16416998 -5.30273924  5.02405909  5.70861874 -5.85003694
+  3.47370742 -4.28452735 -0.88657674  6.42115491  5.91053321 -1.75492596
+ -0.34893227  5.98014597  5.45020033 -1.91845789 -2.33719489 -2.62805937
+ -1.06521494 -2.09515888 -2.41088205  6.24704115 -1.97770395 -4.18186167]
+    Min: -6.220750077519835
+    Max: 10.076988483321504
+    Mean: 0.052158097301202
+    Std: 4.006806616787773
+    Success! 114 CCFs, 5 modes
+    RV range: -6.220750077519835 to 10.076988483321504 m/s
+  Processing NEID...
+    CCF shape: (61, 93), eMJD range: 59332.673420 to 59422.639473
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.006, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.087, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.087 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 93 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (93,)
+    Values: [ 0.67397695 -5.03223178  3.14282631  4.44857426 -1.80676368 -2.99103703
+ -2.47507357 -2.72234471 -3.29723142 -0.90733224  2.60597447  5.06486743
+ -2.01799933 -4.78765222 -2.37552274 -6.93892604 -1.01530427  5.97707653
+  6.0419755   8.96597295  6.36129633 -1.0884923  -2.9203795  -2.18796504
+ -2.5179763  -3.571118    3.79433401  5.48297906  7.68326799  4.84680074
+ -1.07652267 -3.37613398 -3.46994995  3.72500492 -3.73022102 -4.98284244
+ -0.91887972  3.92746939 -1.25826496  3.91231804 -1.54803056 -2.10432107
+ -2.47586342  1.3261436  -3.01383907  0.35033915 -2.98329137 -0.74787022
+ -3.28699995 -0.61889504  7.12139382 -2.88295501 -1.86152363 -0.72670812
+  7.1678393   6.53963679 -4.65959921 -1.91167924 -1.31035508 -2.34925446
+  3.43956927 -5.05049771 -1.64524145 -2.18627581  0.75984347  4.5343003
+ -3.60499071 -1.56475057  7.31592802 -3.25759063  0.85355218  5.32590987
+ -1.95825264 -2.77795432 -3.1639148  -1.8783116  -3.8843173   4.44996284
+ -0.34049338 -1.43471429 -2.72692189  3.49568267  1.27162587  3.2057017
+  0.292165   -0.27631064  2.57205463  2.07028639 -2.17679556  4.45122767
+ -2.8786206  -1.51478668  1.91294057]
+    Min: -6.938926035697748
+    Max: 8.965972948787746
+    Mean: 0.030566957662640
+    Std: 3.627296300711773
+    Success! 93 CCFs, 5 modes
+    RV range: -6.938926035697748 to 8.965972948787746 m/s
+Creating FIESTA plots for DS8...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS8_FIESTA_style.png
+
+Saving .dat files for DS8...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode5.dat
+Completed DS8
 
 ============================================================
 Processing Dataset 9
 ============================================================
 
 Loading pickle data for DS9...
-  harpsn: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS09_invCCF_harpsn.pkl
-  harps: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS09_invCCF_harps.pkl
-  expres: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS09_invCCF_expres.pkl
-  neid: File not found: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS09_invCCF_neid.pkl
-No data found for DS9
+  harpsn: Loaded 66 CCFs
+  harps: Loaded 15 CCFs
+  expres: Loaded 100 CCFs
+  neid: Loaded 60 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS9_loaded_ccfs.png
+
+Applying FIESTA with k_max=5...
+  Processing HARPSN...
+    CCF shape: (61, 66), eMJD range: 59333.533922 to 59422.641516
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.461, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.461 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 66 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (66,)
+    Values: [ 1.00159107 -2.25550578 -1.66522591 -0.46910291 -0.64347306 -0.78053802
+ -0.02968431 -2.28764052 -1.56748377  0.93490888 -0.50474572  1.19349222
+ -3.59676014  3.51442379 -3.66629483 -1.80069125  3.2956766   2.96392899
+  0.44008224  2.03377338 -2.11377473  0.74001723  1.05048523  2.12755214
+  1.58790117 -1.42007445 -0.88498703  1.7602388   0.67600411 -2.41544841
+  3.7935059   3.10996295 -3.47413981  2.96423325  0.54016872 -0.59113011
+ -1.86068541  0.75402444  0.86263953 -0.67617364  0.75776592 -0.19495338
+ -0.20010243 -1.96403268 -2.53387641  4.30371468 -2.33223056 -0.32908592
+  0.50934581  1.43837912  1.34410064 -0.96505906  0.33475495  0.52364407
+  0.99379584  3.34765021 -1.23693697 -3.78153818  1.0413772   1.27234067
+ -0.21092258  1.46739278 -0.15402624 -1.54465885 -2.26308589  0.41820278]
+    Min: -3.781538177632937
+    Max: 4.303714678005887
+    Mean: 0.040651611646031
+    Std: 1.920477276556918
+    Success! 66 CCFs, 5 modes
+    RV range: -3.781538177632937 to 4.303714678005887 m/s
+  Processing HARPS...
+    CCF shape: (61, 15), eMJD range: 59395.677559 to 59422.728510
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 15 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (15,)
+    Values: [-0.79746281  0.08477476  1.24007745  0.6432544  -0.29410112 -1.57264608
+ -0.04773571  0.9335907  -2.08387913  1.88258171  1.62540561 -1.82668041
+ -1.2727562  -0.45062098  1.54262714]
+    Min: -2.083879128009003
+    Max: 1.882581712460363
+    Mean: -0.026238045113280
+    Std: 1.267175175461456
+    Success! 15 CCFs, 5 modes
+    RV range: -2.083879128009003 to 1.882581712460363 m/s
+  Processing EXPRES...
+    CCF shape: (61, 100), eMJD range: 59337.889998 to 59412.689065
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.476, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 100 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (100,)
+    Values: [-2.75336952 -3.1641875  -2.89770961  0.59012717  3.76530374 -1.46274568
+ -0.12630646  0.36685066 -1.07297472 -1.46000595 -0.22561662  0.18032609
+ -1.66673058  0.71196107  0.0391076   1.73014484 -1.19150448  0.84907417
+  1.63292849  1.74010515 -1.29392789 -1.74088333 -0.41167908 -1.04727734
+  0.40786521  1.38984178  0.2233291  -0.92176936 -0.04028941  3.39231002
+  0.34490542  2.73839198  0.70691289 -2.28769017  0.13375709  0.91992433
+ -2.81085007 -0.14108098  0.3025932  -1.19607855 -0.27301606  3.54857759
+  0.18513465  1.23201786  1.22363199 -1.09968137 -0.53579893 -1.93019527
+  2.01507418  2.06991121  1.14258932 -1.47479259  0.61864856  2.5124454
+  0.85864927  0.92378606 -0.16862032  1.30485794  1.42938176  2.15424787
+ -0.29742601 -0.96857244 -2.1155496  -3.05156057  0.08974921  2.61370341
+  2.38731389  2.0763914  -2.3558817   0.04404079 -1.92969824 -0.48734789
+  0.48180236 -0.06044442 -0.22577086 -1.41257015 -2.00719564  0.04588723
+ -1.14024514  0.52123548 -2.00428864  0.16536609 -1.31708616 -1.19503905
+  1.04275664  1.45405584  0.99255657  1.08760134  0.66804743 -0.91452291
+  0.94327175 -0.40048764 -2.68337917 -2.50212369 -1.20354183  0.27332991
+  0.31722318  2.8975458   0.61351921  0.62560381]
+    Min: -3.164187495067236
+    Max: 3.765303740488266
+    Mean: 0.010582014016453
+    Std: 1.555948793500570
+    Success! 100 CCFs, 5 modes
+    RV range: -3.164187495067236 to 3.765303740488266 m/s
+  Processing NEID...
+    CCF shape: (61, 60), eMJD range: 59338.779930 to 59411.906241
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 60 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (60,)
+    Values: [ 0.58944972  0.99260069  1.19047573  0.26267082 -1.71315651 -1.19384817
+  0.1972517  -1.77604235  2.1630103   0.33112682 -2.03881575  0.71372471
+ -2.86807935  0.01039506 -1.03654469  3.17828414 -0.11714102  1.39259903
+  1.3657566   0.93492352 -2.93753927 -0.01167762 -1.58228146  0.15261444
+  0.52333213  0.00556275 -0.35345196 -1.16290427 -2.23045938 -2.16227368
+  1.15474861 -0.72377053 -0.1632701  -0.5630755   1.86147236  2.74541532
+ -0.02292528  0.07692733 -0.47249234  1.41257309 -0.33097938 -3.33804869
+  0.81447538  2.95924286  2.3002901   0.2299169   1.38460624 -1.19289576
+ -1.20583321  1.17077388  2.17430248  0.37294266  0.68866121  0.29394955
+  0.30914599  1.08912844 -0.86882025 -2.43525736 -1.19339653 -0.06655131]
+    Min: -3.338048694241563
+    Max: 3.178284137172846
+    Mean: 0.021346981323326
+    Std: 1.465632327186075
+    Success! 60 CCFs, 5 modes
+    RV range: -3.338048694241563 to 3.178284137172846 m/s
+Creating FIESTA plots for DS9...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS9_FIESTA_style.png
+
+Saving .dat files for DS9...
+  Processing HARPSN...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode5.dat
+  Processing HARPS...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode5.dat
+  Processing EXPRES...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode5.dat
+  Processing NEID...
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode4.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode5.dat
+Completed DS9
 
 ============================================================
 FIESTA Analysis Complete!
