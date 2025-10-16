@@ -281,7 +281,7 @@ def main():
     # Configuration
     essp_dir = "/work2/lbuc/data/ESSP4/ESSP4"
     outdir = "/work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data"
-    fig_dir = "/work2/lbuc/iara/GitHub/ESSP/Figures"
+    fig_dir = "/work2/lbuc/iara/GitHub/ESSP/Figures/Time_series_figures"
     
     os.makedirs(outdir, exist_ok=True)
     os.makedirs(fig_dir, exist_ok=True)

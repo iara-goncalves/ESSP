@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
+import pandas as pd
 from scipy import signal
 
 # Set plotting style
@@ -15,6 +16,7 @@ class FIESTAProcessor:
         self.output_dir = output_dir
         self.dat_output_dir = '/work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data'
         self.instruments = ['harpsn', 'harps', 'expres', 'neid']
+        self.sigma_threshold = 3.5
     
     def load_pickle_data(self, dset_num):
         """Load inverse CCF data from pickle files"""
@@ -39,7 +41,7 @@ class FIESTAProcessor:
         return data
     
     def plot_ccf_data(self, data, dset_num):
-        """Plot loaded CCF data for verification"""
+        """Plot loaded CCF data for verification - renamed to invCCF"""
         if not data:
             return
         
@@ -63,7 +65,7 @@ class FIESTAProcessor:
             # Plot mean with error envelope
             axes[i].plot(v_grid, mean_inv_ccf, color=colors[i], linewidth=2, label='Mean')
             axes[i].fill_between(v_grid, mean_inv_ccf - mean_error, mean_inv_ccf + mean_error, 
-                                alpha=0.3, color=colors[i], label='±1σ (SEM)') #SEM represents Standard Error of the Mean
+                                alpha=0.3, color=colors[i], label='±1σ (SEM)')
             
             axes[i].set_title(f'{inst.upper()} (n={inst_data["n_files"]})')
             axes[i].set_xlabel('Velocity [km/s]')
@@ -72,13 +74,13 @@ class FIESTAProcessor:
             axes[i].grid(True, alpha=0.3)
         
         plt.tight_layout()
-        filename = os.path.join(self.output_dir, f'DS{dset_num}_loaded_ccfs.png')
+        filename = os.path.join(self.output_dir, f'DS{dset_num}_invCCF.png')  # Changed filename
         plt.savefig(filename, dpi=300, bbox_inches='tight')
         plt.close()
         print(f"Saved CCF verification plot: {filename}")
     
-    def apply_fiesta(self, data, dset_num, k_max=5):
-        """Apply FIESTA to loaded CCF data"""
+    def apply_fiesta(self, data, dset_num, k_max=4):
+        """Apply FIESTA and save results to DataFrame"""
         try:
             from FIESTA_II import FIESTA
         except ImportError:
@@ -86,7 +88,7 @@ class FIESTAProcessor:
             return None
         
         print(f"\nApplying FIESTA with k_max={k_max}...")
-        results = {}
+        dataframes = {}
         
         for inst in self.instruments:
             if inst not in data:
@@ -96,9 +98,9 @@ class FIESTAProcessor:
             inst_data = data[inst]
             
             # Extract data
-            inv_ccf_array = inst_data['inv_ccf']  # Shape: (n_files, n_vel_points)
+            inv_ccf_array = inst_data['inv_ccf']
             error_array = inst_data['eccf']
-            v_grid = inst_data['v_grid'][0]  # Assuming all same
+            v_grid = inst_data['v_grid'][0]
             metadata = inst_data['metadata']
             
             # Get times from metadata
@@ -123,18 +125,16 @@ class FIESTAProcessor:
                     RV_FT_k = v_k * 1000
                     eRV_FT_k = sigma_v_k * 1000
                     
-                    # Print RV_gauss values with maximum precision
                     print(f"    RV_gauss values (m/s) for {inst.upper()}:")
                     print(f"    Shape: {RV_gauss_ms.shape}")
-                    print(f"    Values: {RV_gauss_ms}")
-                    print(f"    Min: {np.min(RV_gauss_ms):.15f}")
-                    print(f"    Max: {np.max(RV_gauss_ms):.15f}")
-                    print(f"    Mean: {np.mean(RV_gauss_ms):.15f}")
-                    print(f"    Std: {np.std(RV_gauss_ms):.15f}")
+                    print(f"    Min: {np.min(RV_gauss_ms):.6f}")
+                    print(f"    Max: {np.max(RV_gauss_ms):.6f}")
+                    print(f"    Mean: {np.mean(RV_gauss_ms):.6f}")
+                    print(f"    Std: {np.std(RV_gauss_ms):.6f}")
                     
                     # Calculate differential RVs
                     if np.std(RV_gauss_ms) < 1e-3:  # Flat RV_gauss
-                        print(f"    Warning: RV_gauss is flat (std={np.std(RV_gauss_ms):.15f}), using first mode as reference")
+                        print(f"    Warning: RV_gauss is flat (std={np.std(RV_gauss_ms):.6f}), using first mode as reference")
                         RV_reference = RV_FT_k[0, :].copy()
                         ΔRV_k = np.zeros((RV_FT_k.shape[0]-1, RV_FT_k.shape[1]))
                         for k in range(1, RV_FT_k.shape[0]):
@@ -145,21 +145,33 @@ class FIESTAProcessor:
                         for k in range(RV_FT_k.shape[0]):
                             ΔRV_k[k, :] = RV_FT_k[k, :] - RV_reference
                     
-                    # Store results
-                    results[inst] = {
+                    # Create DataFrame with all the data
+                    df_data = {
                         'emjd_times': emjd_times,
-                        'V_grid': v_grid,
-                        'RV_FT_k': RV_FT_k,
-                        'eRV_FT_k': eRV_FT_k,
-                        'A_k': A_k,
-                        'RV_gauss': RV_reference,
-                        'ΔRV_k': ΔRV_k,
-                        'n_files': n_files,
-                        'k_max': ΔRV_k.shape[0]
+                        'RV_gauss': RV_reference
                     }
                     
-                    print(f"    Success! {n_files} CCFs, {ΔRV_k.shape[0]} modes")
-                    print(f"    RV range: {np.min(RV_reference):.15f} to {np.max(RV_reference):.15f} m/s")
+                    # Add differential modes
+                    for k in range(ΔRV_k.shape[0]):
+                        df_data[f'delta_RV_{k+1}'] = ΔRV_k[k, :]
+                    
+                    # Add uncertainties
+                    if eRV_FT_k.shape[0] > 0:
+                        df_data['eRV_gauss'] = eRV_FT_k[0, :]
+                        for k in range(min(ΔRV_k.shape[0], eRV_FT_k.shape[0])):
+                            df_data[f'e_delta_RV_{k+1}'] = eRV_FT_k[k, :]
+                    else:
+                        # Generate default uncertainties
+                        df_data['eRV_gauss'] = np.full(n_files, np.std(RV_reference) * 0.1)
+                        for k in range(ΔRV_k.shape[0]):
+                            df_data[f'e_delta_RV_{k+1}'] = np.full(n_files, np.std(ΔRV_k[k, :]))
+                    
+                    # Create DataFrame
+                    df_inst = pd.DataFrame(df_data)
+                    dataframes[inst] = df_inst
+                    
+                    print(f"    Success! DataFrame created with {len(df_inst)} points, {ΔRV_k.shape[0]} modes")
+                    print(f"    DataFrame columns: {list(df_inst.columns)}")
                 
                 else:
                     print(f"    Warning: FIESTA returned {len(result)} values (expected 6)")
@@ -168,194 +180,203 @@ class FIESTAProcessor:
                 print(f"    Error applying FIESTA: {e}")
                 continue
         
-        return results
-
-    def periodogram(self, ax, time, data, vlines=None):
-        """Calculate and plot periodogram"""
-        data_centered = data - np.mean(data)
-        frequencies = np.logspace(-2, 2, 1000)
-        periods = 1.0 / frequencies
-        
-        try:
-            power = signal.lombscargle(time, data_centered, frequencies, normalize=True)
-            ax.semilogx(periods, power, 'k-', alpha=0.7, linewidth=1)
-            
-            if vlines:
-                for period in vlines:
-                    ax.axvline(period, color='red', linestyle='--', alpha=0.7, linewidth=1)
-                    ax.text(period, ax.get_ylim()[1]*0.9, f'{period}', 
-                           rotation=90, ha='right', va='top', fontsize=8, color='red')
-            
-            ax.set_xlim(1, 100)
-            ax.set_ylabel('Power')
-            
-        except Exception as e:
-            print(f"Error calculating periodogram: {e}")
-            ax.text(0.5, 0.5, 'Periodogram\nError', ha='center', va='center', 
-                    transform=ax.transAxes)
+        return dataframes
     
-    def plot_fiesta_results(self, results, dset_num):
-        """Plot FIESTA results"""
-        if not results:
-            return
+    def detect_outliers(self, dataframes, dset_num):
+        """Detect outliers using 3-sigma clipping"""
+        print(f"\nDetecting outliers with {self.sigma_threshold}-sigma clipping for DS{dset_num}...")
         
-        print(f"Creating FIESTA plots for DS{dset_num}...")
+        outlier_info = {}
+        
+        for inst, df in dataframes.items():
+            print(f"  Processing {inst.upper()}...")
+            
+            # Detect outliers in RV_gauss
+            rv_mean = df['RV_gauss'].mean()
+            rv_std = df['RV_gauss'].std()
+            rv_outliers = np.abs((df['RV_gauss'] - rv_mean) / rv_std) > self.sigma_threshold
+            
+            # Detect outliers in differential modes
+            mode_outliers = np.zeros(len(df), dtype=bool)
+            mode_columns = [col for col in df.columns if col.startswith('delta_RV_')]
+            
+            for col in mode_columns:
+                col_mean = df[col].mean()
+                col_std = df[col].std()
+                col_outliers = np.abs((df[col] - col_mean) / col_std) > self.sigma_threshold
+                mode_outliers |= col_outliers
+            
+            # Combine all outliers
+            all_outliers = rv_outliers | mode_outliers
+            
+            outlier_info[inst] = {
+                'rv_outliers': rv_outliers,
+                'mode_outliers': mode_outliers,
+                'all_outliers': all_outliers,
+                'n_rv_outliers': np.sum(rv_outliers),
+                'n_mode_outliers': np.sum(mode_outliers & ~rv_outliers),
+                'n_total_outliers': np.sum(all_outliers),
+                'original_points': len(df),
+                'outlier_percentage': 100 * np.sum(all_outliers) / len(df)
+            }
+            
+            print(f"    Original points: {len(df)}")
+            print(f"    RV outliers: {np.sum(rv_outliers)}")
+            print(f"    Mode outliers: {np.sum(mode_outliers & ~rv_outliers)}")
+            print(f"    Total outliers: {np.sum(all_outliers)} ({100 * np.sum(all_outliers) / len(df):.1f}%)")
+        
+        return outlier_info
+
+    def plot_time_series_with_outliers(self, dataframes, outlier_info, dset_num):
+        """Plot FIESTA time series with outliers highlighted using your aesthetics"""
+        print(f"Creating FIESTA activity plots for DS{dset_num}...")
         
         # Combine all instruments
-        all_times, all_rv_gauss, all_delta_rvs = [], [], []
+        all_data = []
+        for inst, df in dataframes.items():
+            df_copy = df.copy()
+            df_copy['instrument'] = inst.upper()
+            df_copy['is_outlier'] = outlier_info[inst]['all_outliers']
+            all_data.append(df_copy)
         
-        for inst in results:
-            data = results[inst]
-            times = data['emjd_times'] - np.min(data['emjd_times'])
-            rv_gauss = data['RV_gauss']
-            delta_rvs = data['ΔRV_k']
+        if not all_data:
+            return
+        
+        combined_df = pd.concat(all_data, ignore_index=True)
+        
+        # Get mode columns and create plot info
+        mode_columns = [col for col in combined_df.columns if col.startswith('delta_RV_')]
+        n_modes = len(mode_columns)
+        
+        plot_info = [("RV_gauss", "eRV_gauss", "RV [m/s]")]
+        for i, col in enumerate(mode_columns):
+            error_col = f'e_delta_RV_{i+1}'
+            plot_info.append((col, error_col, f"δRV_{i+1} [m/s]"))
+        
+        # Get all unique instruments and colors
+        all_instruments = sorted(combined_df["instrument"].unique())
+        colors = plt.cm.tab10(np.linspace(0, 1, len(all_instruments)))
+        color_map = dict(zip(all_instruments, colors))
+        
+        # Create plot
+        fig, axes = plt.subplots(n_modes + 1, 1, figsize=(12, (n_modes + 1) * 3), sharex=True)
+        if n_modes == 0:
+            axes = [axes]
+        
+        for ax_idx, (col, err_col, ylabel) in enumerate(plot_info):
+            ax = axes[ax_idx]
             
-            all_times.extend(times)
-            all_rv_gauss.extend(rv_gauss)
+            if col not in combined_df.columns:
+                ax.text(0.5, 0.5, f"Column '{col}' not found", 
+                    ha='center', va='center', transform=ax.transAxes)
+                ax.set_ylabel(ylabel)
+                continue
             
-            if len(all_delta_rvs) == 0:
-                all_delta_rvs = [[] for _ in range(delta_rvs.shape[0])]
+            # Calculate instrument-specific medians for centering
+            inst_medians = combined_df.groupby("instrument")[col].median()
             
-            for k in range(delta_rvs.shape[0]):
-                all_delta_rvs[k].extend(delta_rvs[k, :])
-        
-        # Convert to arrays
-        all_times = np.array(all_times)
-        all_rv_gauss = np.array(all_rv_gauss)
-        all_delta_rvs = [np.array(drv) for drv in all_delta_rvs]
-        
-        k_mode = len(all_delta_rvs)
-        N_file = len(all_times)
-        
-        # Setup plot
-        alpha1 = 0.2
-        plt.rcParams.update({'font.size': 10})
-        widths = [7, 1, 7]
-        heights = [1] * (k_mode + 1)
-        gs_kw = dict(width_ratios=widths, height_ratios=heights)
-        
-        fig, axes = plt.subplots(figsize=(10, k_mode + 1), ncols=3, nrows=k_mode + 1, 
-                                constrained_layout=True, gridspec_kw=gs_kw)
-        
-        # Import for R² calculation
-        try:
-            from sklearn.linear_model import LinearRegression
-        except ImportError:
-            LinearRegression = None
-        
-        # Plot each row
-        for r in range(k_mode + 1):
-            for c in range(3):
-                ax = axes[r, c]
+            # Plot each instrument
+            for inst in all_instruments:
+                inst_data = combined_df[combined_df["instrument"] == inst].copy()
+                if inst_data.empty:
+                    continue
                 
-                # Time-series
-                if c == 0:
-                    if r == 0:
-                        ax.plot(all_times, all_rv_gauss, 'k.', alpha=alpha1)
-                        ax.set_title('Time-series')
-                        ax.set_ylabel('$RV_{gauss}$')
-                    else:
-                        ax.plot(all_times, all_delta_rvs[r-1], 'k.', alpha=alpha1)
-                        ax.set_ylabel(r'$\Delta$RV$_{%d}$' % r)
-                    
-                    if r == k_mode:
-                        ax.set_xlabel('Time [d]')
-                    else:
-                        ax.tick_params(labelbottom=False)
+                # Center data by instrument median
+                center = inst_medians[inst]
                 
-                # R² correlation
-                elif c == 1:
-                    if LinearRegression is not None:
-                        if r == 0:
-                            reg = LinearRegression().fit(all_rv_gauss.reshape(-1, 1), 
-                                                       all_rv_gauss.reshape(-1, 1))
-                            score = reg.score(all_rv_gauss.reshape(-1, 1), 
-                                            all_rv_gauss.reshape(-1, 1))
-                        else:
-                            reg = LinearRegression().fit(all_rv_gauss.reshape(-1, 1), 
-                                                       all_delta_rvs[r-1].reshape(-1, 1))
-                            score = reg.score(all_rv_gauss.reshape(-1, 1), 
-                                            all_delta_rvs[r-1].reshape(-1, 1))
-                        
-                        adjust_R2 = 1 - (1 - score) * (N_file - 1) / (N_file - 2)
-                        ax.set_title(r'$\bar{R}^2$' + f' = {adjust_R2:.2f}')
-                        
-                        if r == 0:
-                            ax.plot(all_rv_gauss, all_rv_gauss, 'k.', alpha=alpha1)
-                        else:
-                            ax.plot(all_rv_gauss, all_delta_rvs[r-1], 'k.', alpha=alpha1)
-                    else:
-                        ax.text(0.5, 0.5, 'R² calc\nunavailable', ha='center', va='center',
-                               transform=ax.transAxes)
-                    
-                    if r == k_mode:
-                        ax.set_xlabel('$RV_{gauss}$')
-                    else:
-                        ax.tick_params(labelbottom=False)
-                    ax.yaxis.tick_right()
+                # Determine error values
+                if err_col and err_col in inst_data.columns:
+                    yerr = inst_data[err_col]
+                else:
+                    yerr = np.std(inst_data[col]) * 0.1  # Default error
                 
-                # Periodograms
-                elif c == 2:
-                    if r == 0:
-                        self.periodogram(ax, all_times, all_rv_gauss, vlines=[8.0, 14.6, 26.6])
-                        ax.set_title('Periodogram')
-                    else:
-                        self.periodogram(ax, all_times, all_delta_rvs[r-1], vlines=[8.0, 14.6, 26.6])
-                    
-                    if r == k_mode:
-                        ax.set_xlabel('Period [days]')
-                    else:
-                        ax.tick_params(labelbottom=False)
+                # Split into inliers and outliers
+                inliers = inst_data[~inst_data["is_outlier"]]
+                outliers = inst_data[inst_data["is_outlier"]]
+                
+                # Plot inliers
+                if not inliers.empty:
+                    y_in = inliers[col] - center
+                    yerr_in = yerr.loc[inliers.index] if isinstance(yerr, pd.Series) else yerr
+                    ax.errorbar(inliers["emjd_times"], y_in, yerr=yerr_in,
+                            fmt=".", color=color_map[inst], label=inst, 
+                            alpha=0.8, markersize=6)
+                
+                # Plot outliers
+                if not outliers.empty:
+                    y_out = outliers[col] - center
+                    yerr_out = yerr.loc[outliers.index] if isinstance(yerr, pd.Series) else yerr
+                    ax.errorbar(outliers["emjd_times"], y_out, yerr=yerr_out,
+                            fmt="o", color="black", alpha=0.7, markersize=8,
+                            markeredgecolor="red", markeredgewidth=1.5)
+            
+            ax.set_ylabel(ylabel)
+            ax.grid(True, alpha=0.3)
         
-        fig.align_ylabels(axes[:, 0])
+        # Add outlier legend entry
+        if combined_df["is_outlier"].any():
+            axes[0].errorbar([], [], [], fmt="o", color="black", alpha=0.7, 
+                            markeredgecolor="red", markeredgewidth=1.5, 
+                            label="Outliers")
         
-        filename = os.path.join(self.output_dir, f'DS{dset_num}_FIESTA_style.png')
-        plt.savefig(filename, dpi=300, bbox_inches='tight')
+        axes[-1].set_xlabel("Time [eMJD]")
+        
+        # Create legend with unique entries
+        handles, labels = axes[0].get_legend_handles_labels()
+        by_label = dict(zip(labels, handles))
+        axes[0].legend(by_label.values(), by_label.keys(), loc="best")
+        
+        fig.suptitle(f"DS{dset_num} FIESTA Activity Indicators (Red-edged = Outliers)", fontsize=16)
+        plt.tight_layout(rect=[0, 0, 1, 0.97])
+        
+        filename = os.path.join(self.output_dir, f'DS{dset_num}_activity_FIESTA.png')
+        plt.savefig(filename, dpi=150, bbox_inches='tight')
         plt.close()
         print(f"Saved: {filename}")
     
-    def save_dat_files(self, results, dset_num):
-        """Save FIESTA results to .dat files"""
-        if not results:
-            return
-        
-        print(f"\nSaving .dat files for DS{dset_num}...")
+    def save_dat_files_without_outliers(self, dataframes, outlier_info, dset_num):
+        """Save .dat files without outliers"""
+        print(f"\nSaving .dat files without outliers for DS{dset_num}...")
         os.makedirs(self.dat_output_dir, exist_ok=True)
         
-        for inst in results:
-            data = results[inst]
-            n_obs = data['n_files']
-            k_max = data['k_max']
-            emjd_times = data['emjd_times']
-            
+        for inst, df in dataframes.items():
             print(f"  Processing {inst.upper()}...")
+            
+            # Remove outliers
+            outliers = outlier_info[inst]['all_outliers']
+            df_clean = df[~outliers].copy()
+            
+            print(f"    Original: {len(df)} points")
+            print(f"    After outlier removal: {len(df_clean)} points")
+            
+            if len(df_clean) == 0:
+                print(f"    Warning: No data left after outlier removal for {inst}")
+                continue
+            
+            # Prepare common columns
+            emjd_times = df_clean['emjd_times'].values
+            jitter = np.zeros(len(df_clean))
+            offset = np.zeros(len(df_clean))
+            flag = np.full(len(df_clean), -1, dtype=int)
             
             # Save RV_gauss
             filename_rv = os.path.join(self.dat_output_dir, f'DS{dset_num}_{inst}_fiesta_rv_gauss.dat')
-            rv_gauss = data['RV_gauss']
-            
-            if 'eRV_FT_k' in data and data['eRV_FT_k'].shape[0] > 0:
-                rv_uncertainties = data['eRV_FT_k'][0, :]
-            else:
-                rv_uncertainties = np.full(n_obs, np.std(rv_gauss) * 0.1)
-            
-            jitter = np.zeros(n_obs)
-            offset = np.zeros(n_obs)
-            flag = np.full(n_obs, -1, dtype=int)
+            rv_gauss = df_clean['RV_gauss'].values
+            rv_uncertainties = df_clean['eRV_gauss'].values
             
             rv_data = np.column_stack([emjd_times, rv_gauss, rv_uncertainties, jitter, offset, flag])
             np.savetxt(filename_rv, rv_data, fmt=['%.6f', '%.6f', '%.6f', '%d', '%d', '%d'])
             print(f"    Saved: {filename_rv}")
             
             # Save differential modes
-            for k in range(k_max):
-                filename = os.path.join(self.dat_output_dir, f'DS{dset_num}_{inst}_fiesta_mode{k+1}.dat')
-                delta_rv = data['ΔRV_k'][k, :]
+            mode_columns = [col for col in df_clean.columns if col.startswith('delta_RV_')]
+            for i, col in enumerate(mode_columns):
+                mode_num = i + 1
+                filename = os.path.join(self.dat_output_dir, f'DS{dset_num}_{inst}_fiesta_mode{mode_num}.dat')
                 
-                if 'eRV_FT_k' in data and k < data['eRV_FT_k'].shape[0]:
-                    uncertainties = data['eRV_FT_k'][k, :]
-                else:
-                    uncertainties = np.full(n_obs, np.std(delta_rv))
+                delta_rv = df_clean[col].values
+                error_col = f'e_delta_RV_{mode_num}'
+                uncertainties = df_clean[error_col].values if error_col in df_clean.columns else np.full(len(df_clean), np.std(delta_rv))
                 
                 output_data = np.column_stack([emjd_times, delta_rv, uncertainties, jitter, offset, flag])
                 np.savetxt(filename, output_data, fmt=['%.6f', '%.6f', '%.6f', '%d', '%d', '%d'])
@@ -366,12 +387,13 @@ def main():
     ccf_data_dir = '/work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data'
     output_dir = '/work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures'
     dataset = None  # Specific dataset or None for all
-    k_max = 5
+    k_max = 4
     
-    print(f"FIESTA Analysis from Pickle Files")
+    print(f"FIESTA Analysis with Outlier Detection")
     print(f"CCF data directory: {ccf_data_dir}")
     print(f"Output directory: {output_dir}")
     print(f"FIESTA modes: {k_max}")
+    print(f"Outlier detection: 3-sigma clipping")
     
     # Initialize processor
     processor = FIESTAProcessor(ccf_data_dir, output_dir)
@@ -381,7 +403,6 @@ def main():
     if dataset:
         datasets = [dataset]
     else:
-        # Find available datasets from pickle files
         pickle_files = [f for f in os.listdir(ccf_data_dir) if f.endswith('_invCCF_harps.pkl')]
         datasets = sorted([int(f.split('_')[0][2:]) for f in pickle_files])
     
@@ -402,15 +423,18 @@ def main():
         # Plot loaded data for verification
         processor.plot_ccf_data(ccf_data, dset_num)
         
-        # Apply FIESTA
-        fiesta_results = processor.apply_fiesta(ccf_data, dset_num, k_max)
+        # Apply FIESTA and create DataFrames
+        dataframes = processor.apply_fiesta(ccf_data, dset_num, k_max)
         
-        if fiesta_results:
-            # Plot results
-            processor.plot_fiesta_results(fiesta_results, dset_num)
+        if dataframes:
+            # Detect outliers
+            outlier_info = processor.detect_outliers(dataframes, dset_num)
             
-            # Save .dat files
-            processor.save_dat_files(fiesta_results, dset_num)
+            # Plot time series with outliers marked
+            processor.plot_time_series_with_outliers(dataframes, outlier_info, dset_num)
+            
+            # Save .dat files without outliers
+            processor.save_dat_files_without_outliers(dataframes, outlier_info, dset_num)
         
         print(f"Completed DS{dset_num}")
     

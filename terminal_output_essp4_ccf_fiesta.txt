@@ -1,0 +1,1558 @@
+FIESTA Analysis with Outlier Detection
+CCF data directory: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data
+Output directory: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures
+FIESTA modes: 4
+Outlier detection: 3-sigma clipping
+Processing datasets: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+============================================================
+Processing Dataset 1
+============================================================
+
+Loading pickle data for DS1...
+  harpsn: Loaded 84 CCFs
+  harps: Loaded 24 CCFs
+  expres: Loaded 96 CCFs
+  neid: Loaded 84 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS1_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 84), eMJD range: 59337.993481 to 59423.926247
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (84,)
+    Min: -4.117940
+    Max: 3.166164
+    Mean: -0.019743
+    Std: 1.866153
+    Success! DataFrame created with 84 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 24), eMJD range: 59399.074692 to 59422.081835
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.944
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.944 km/s
+
+Processing individual CCFs...
+✓ All 24 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (24,)
+    Min: -5.049117
+    Max: 2.904042
+    Mean: -0.055643
+    Std: 2.155409
+    Success! DataFrame created with 24 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 96), eMJD range: 59338.301795 to 59422.296261
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.476, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 96 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (96,)
+    Min: -4.212346
+    Max: 4.596997
+    Mean: 0.012488
+    Std: 1.948192
+    Success! DataFrame created with 96 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 84), eMJD range: 59340.142771 to 59422.237326
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (84,)
+    Min: -4.501595
+    Max: 4.133913
+    Mean: 0.019286
+    Std: 2.057439
+    Success! DataFrame created with 84 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS1...
+  Processing HARPSN...
+    Original points: 84
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 24
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 96
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 84
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS1...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS1_activity_FIESTA.png
+
+Saving .dat files without outliers for DS1...
+  Processing HARPSN...
+    Original: 84 points
+    After outlier removal: 84 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 24 points
+    After outlier removal: 24 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 96 points
+    After outlier removal: 96 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 84 points
+    After outlier removal: 84 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS1_neid_fiesta_mode4.dat
+Completed DS1
+
+============================================================
+Processing Dataset 2
+============================================================
+
+Loading pickle data for DS2...
+  harpsn: Loaded 90 CCFs
+  harps: Loaded 33 CCFs
+  expres: Loaded 110 CCFs
+  neid: Loaded 90 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS2_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 90), eMJD range: 59331.910942 to 59419.951685
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.461, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.461 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 90 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (90,)
+    Min: -3.827772
+    Max: 3.498246
+    Mean: 0.028958
+    Std: 1.462306
+    Success! DataFrame created with 90 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 33), eMJD range: 59396.187173 to 59415.076140
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 33 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (33,)
+    Min: -3.448312
+    Max: 3.171349
+    Mean: -0.013586
+    Std: 1.425648
+    Success! DataFrame created with 33 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 110), eMJD range: 59336.304991 to 59420.287906
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 110 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (110,)
+    Min: -3.950621
+    Max: 3.717012
+    Mean: 0.019400
+    Std: 1.627487
+    Success! DataFrame created with 110 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 90), eMJD range: 59332.207998 to 59420.195294
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.005, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 90 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (90,)
+    Min: -3.672207
+    Max: 3.727661
+    Mean: 0.011139
+    Std: 1.322559
+    Success! DataFrame created with 90 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS2...
+  Processing HARPSN...
+    Original points: 90
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 33
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 110
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 90
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS2...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS2_activity_FIESTA.png
+
+Saving .dat files without outliers for DS2...
+  Processing HARPSN...
+    Original: 90 points
+    After outlier removal: 90 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 33 points
+    After outlier removal: 33 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 110 points
+    After outlier removal: 110 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 90 points
+    After outlier removal: 90 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS2_neid_fiesta_mode4.dat
+Completed DS2
+
+============================================================
+Processing Dataset 3
+============================================================
+
+Loading pickle data for DS3...
+  harpsn: Loaded 96 CCFs
+  harps: Loaded 18 CCFs
+  expres: Loaded 122 CCFs
+  neid: Loaded 87 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS3_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 96), eMJD range: 59332.006941 to 59420.055097
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 96 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (96,)
+    Min: -3.560570
+    Max: 3.519495
+    Mean: 0.000826
+    Std: 1.441296
+    Success! DataFrame created with 96 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 18), eMJD range: 59400.261026 to 59415.219886
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 18 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (18,)
+    Min: -2.899156
+    Max: 4.093671
+    Mean: 0.014090
+    Std: 1.808477
+    Success! DataFrame created with 18 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 122), eMJD range: 59336.400193 to 59420.325989
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 122 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (122,)
+    Min: -4.983582
+    Max: 4.880905
+    Mean: 0.000505
+    Std: 1.697969
+    Success! DataFrame created with 122 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 87), eMJD range: 59332.306663 to 59420.355373
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.005, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 87 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (87,)
+    Min: -3.339702
+    Max: 3.671463
+    Mean: 0.012677
+    Std: 1.490926
+    Success! DataFrame created with 87 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS3...
+  Processing HARPSN...
+    Original points: 96
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 18
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 122
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 87
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS3...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS3_activity_FIESTA.png
+
+Saving .dat files without outliers for DS3...
+  Processing HARPSN...
+    Original: 96 points
+    After outlier removal: 96 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 18 points
+    After outlier removal: 18 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 122 points
+    After outlier removal: 122 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 87 points
+    After outlier removal: 87 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS3_neid_fiesta_mode4.dat
+Completed DS3
+
+============================================================
+Processing Dataset 4
+============================================================
+
+Loading pickle data for DS4...
+  harpsn: Loaded 84 CCFs
+  harps: Loaded 24 CCFs
+  expres: Loaded 93 CCFs
+  neid: Loaded 78 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS4_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 84), eMJD range: 59332.426929 to 59424.415942
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.460, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.460 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (84,)
+    Min: -3.547482
+    Max: 6.816364
+    Mean: 0.010599
+    Std: 2.581341
+    Success! DataFrame created with 84 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 24), eMJD range: 59400.711146 to 59423.697202
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.565, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.565 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 24 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (24,)
+    Min: -2.306376
+    Max: 3.038937
+    Mean: 0.006065
+    Std: 1.301811
+    Success! DataFrame created with 24 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 93), eMJD range: 59336.729598 to 59421.812232
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.093, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.093 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 93 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (93,)
+    Min: -4.441590
+    Max: 7.708137
+    Mean: 0.003715
+    Std: 2.879121
+    Success! DataFrame created with 93 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 78), eMJD range: 59332.690415 to 59421.804826
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.005, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.080, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.080 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 78 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (78,)
+    Min: -4.853884
+    Max: 7.316622
+    Mean: 0.059038
+    Std: 2.656908
+    Success! DataFrame created with 78 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS4...
+  Processing HARPSN...
+    Original points: 84
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 24
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 93
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 78
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS4...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS4_activity_FIESTA.png
+
+Saving .dat files without outliers for DS4...
+  Processing HARPSN...
+    Original: 84 points
+    After outlier removal: 84 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 24 points
+    After outlier removal: 24 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 93 points
+    After outlier removal: 93 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 78 points
+    After outlier removal: 78 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS4_neid_fiesta_mode4.dat
+Completed DS4
+
+============================================================
+Processing Dataset 5
+============================================================
+
+Loading pickle data for DS5...
+  harpsn: Loaded 84 CCFs
+  harps: Loaded 21 CCFs
+  expres: Loaded 100 CCFs
+  neid: Loaded 75 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS5_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 84), eMJD range: 59334.700184 to 59423.689751
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (84,)
+    Min: -4.755792
+    Max: 3.166228
+    Mean: -0.005315
+    Std: 1.678528
+    Success! DataFrame created with 84 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 21), eMJD range: 59401.927059 to 59422.874376
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.570, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.570 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 21 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (21,)
+    Min: -4.566130
+    Max: 3.013128
+    Mean: -0.145116
+    Std: 2.026956
+    Success! DataFrame created with 21 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 100), eMJD range: 59336.087932 to 59421.136709
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 100 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (100,)
+    Min: -4.601184
+    Max: 4.654736
+    Mean: -0.019024
+    Std: 2.363797
+    Success! DataFrame created with 100 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 75), eMJD range: 59334.934601 to 59420.991383
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.078, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.078 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 75 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (75,)
+    Min: -3.910667
+    Max: 3.622744
+    Mean: 0.038610
+    Std: 1.845237
+    Success! DataFrame created with 75 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS5...
+  Processing HARPSN...
+    Original points: 84
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 21
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 100
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 75
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS5...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS5_activity_FIESTA.png
+
+Saving .dat files without outliers for DS5...
+  Processing HARPSN...
+    Original: 84 points
+    After outlier removal: 84 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 21 points
+    After outlier removal: 21 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 100 points
+    After outlier removal: 100 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 75 points
+    After outlier removal: 75 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS5_neid_fiesta_mode4.dat
+Completed DS5
+
+============================================================
+Processing Dataset 6
+============================================================
+
+Loading pickle data for DS6...
+  harpsn: Loaded 90 CCFs
+  harps: Loaded 27 CCFs
+  expres: Loaded 111 CCFs
+  neid: Loaded 93 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS6_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 90), eMJD range: 59333.415568 to 59420.314375
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 90 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (90,)
+    Min: -4.809155
+    Max: 5.273756
+    Mean: 0.003047
+    Std: 2.056416
+    Success! DataFrame created with 90 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 27), eMJD range: 59396.579107 to 59414.563371
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.568, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.568 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 27 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (27,)
+    Min: -4.804579
+    Max: 3.893659
+    Mean: -0.057184
+    Std: 2.227284
+    Success! DataFrame created with 27 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 111), eMJD range: 59336.758799 to 59420.753027
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.476, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 111 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (111,)
+    Min: -4.724860
+    Max: 4.907590
+    Mean: 0.023941
+    Std: 2.256567
+    Success! DataFrame created with 111 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 93), eMJD range: 59336.743932 to 59420.656469
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 93 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (93,)
+    Min: -4.312065
+    Max: 4.937943
+    Mean: -0.044038
+    Std: 1.964900
+    Success! DataFrame created with 93 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS6...
+  Processing HARPSN...
+    Original points: 90
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 27
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 111
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 93
+    RV outliers: 0
+    Mode outliers: 1
+    Total outliers: 1 (1.1%)
+Creating FIESTA activity plots for DS6...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS6_activity_FIESTA.png
+
+Saving .dat files without outliers for DS6...
+  Processing HARPSN...
+    Original: 90 points
+    After outlier removal: 90 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 27 points
+    After outlier removal: 27 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 111 points
+    After outlier removal: 111 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 93 points
+    After outlier removal: 92 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS6_neid_fiesta_mode4.dat
+Completed DS6
+
+============================================================
+Processing Dataset 7
+============================================================
+
+Loading pickle data for DS7...
+  harpsn: Loaded 78 CCFs
+  harps: Loaded 24 CCFs
+  expres: Loaded 104 CCFs
+  neid: Loaded 84 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS7_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 78), eMJD range: 59333.584825 to 59416.600384
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.462, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.462 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 78 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (78,)
+    Min: -3.754161
+    Max: 4.159048
+    Mean: 0.068998
+    Std: 1.835849
+    Success! DataFrame created with 78 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 24), eMJD range: 59395.820428 to 59411.783730
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.601, sig=2.888, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 24 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (24,)
+    Min: -3.061225
+    Max: 2.907988
+    Mean: -0.007587
+    Std: 1.724035
+    Success! DataFrame created with 24 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 104), eMJD range: 59335.858004 to 59418.799316
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 104 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (104,)
+    Min: -4.267331
+    Max: 3.453537
+    Mean: 0.029099
+    Std: 1.547259
+    Success! DataFrame created with 104 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 84), eMJD range: 59334.835761 to 59418.868144
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 84 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (84,)
+    Min: -3.063283
+    Max: 3.919452
+    Mean: -0.001862
+    Std: 1.576027
+    Success! DataFrame created with 84 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS7...
+  Processing HARPSN...
+    Original points: 78
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 24
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 104
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 84
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS7...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS7_activity_FIESTA.png
+
+Saving .dat files without outliers for DS7...
+  Processing HARPSN...
+    Original: 78 points
+    After outlier removal: 78 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 24 points
+    After outlier removal: 24 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 104 points
+    After outlier removal: 104 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 84 points
+    After outlier removal: 84 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS7_neid_fiesta_mode4.dat
+Completed DS7
+
+============================================================
+Processing Dataset 8
+============================================================
+
+Loading pickle data for DS8...
+  harpsn: Loaded 87 CCFs
+  harps: Loaded 30 CCFs
+  expres: Loaded 114 CCFs
+  neid: Loaded 93 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS8_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 87), eMJD range: 59332.340853 to 59422.503487
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.584, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.454, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.454 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 87 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (87,)
+    Min: -4.948082
+    Max: 9.266241
+    Mean: 0.003195
+    Std: 3.737478
+    Success! DataFrame created with 87 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 30), eMJD range: 59396.554028 to 59422.586241
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.599, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.558, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.558 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 30 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (30,)
+    Min: -4.860526
+    Max: 2.998471
+    Mean: 0.071553
+    Std: 1.541864
+    Success! DataFrame created with 30 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 114), eMJD range: 59338.753053 to 59422.796142
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.475, mu=-0.006, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.099, sigma=2.857
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.099 ± 2.857 km/s
+
+Processing individual CCFs...
+✓ All 114 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (114,)
+    Min: -6.220750
+    Max: 10.076988
+    Mean: 0.052158
+    Std: 4.006807
+    Success! DataFrame created with 114 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 93), eMJD range: 59332.673420 to 59422.639473
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.006, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.087, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.087 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 93 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (93,)
+    Min: -6.938926
+    Max: 8.965973
+    Mean: 0.030567
+    Std: 3.627296
+    Success! DataFrame created with 93 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS8...
+  Processing HARPSN...
+    Original points: 87
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 30
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 114
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 93
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS8...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS8_activity_FIESTA.png
+
+Saving .dat files without outliers for DS8...
+  Processing HARPSN...
+    Original: 87 points
+    After outlier removal: 87 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 30 points
+    After outlier removal: 30 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 114 points
+    After outlier removal: 114 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 93 points
+    After outlier removal: 93 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS8_neid_fiesta_mode4.dat
+Completed DS8
+
+============================================================
+Processing Dataset 9
+============================================================
+
+Loading pickle data for DS9...
+  harpsn: Loaded 66 CCFs
+  harps: Loaded 15 CCFs
+  expres: Loaded 100 CCFs
+  neid: Loaded 60 CCFs
+Saved CCF verification plot: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS9_invCCF.png
+
+Applying FIESTA with k_max=4...
+  Processing HARPSN...
+    CCF shape: (61, 66), eMJD range: 59333.533922 to 59422.641516
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.514, mu=0.585, sig=2.718, offset=0.003
+✓ Fit successful with bounds
+Final fit: center=0.461, sigma=2.910
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.461 ± 2.910 km/s
+
+Processing individual CCFs...
+✓ All 66 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPSN:
+    Shape: (66,)
+    Min: -3.781538
+    Max: 4.303715
+    Mean: 0.040652
+    Std: 1.920477
+    Success! DataFrame created with 66 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing HARPS...
+    CCF shape: (61, 15), eMJD range: 59395.677559 to 59422.728510
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.492, mu=0.600, sig=2.888, offset=0.006
+✓ Fit successful with bounds
+Final fit: center=0.569, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: 0.569 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 15 Gaussian fits successful
+
+    RV_gauss values (m/s) for HARPS:
+    Shape: (15,)
+    Min: -2.083879
+    Max: 1.882582
+    Mean: -0.026238
+    Std: 1.267175
+    Success! DataFrame created with 15 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing EXPRES...
+    CCF shape: (61, 100), eMJD range: 59337.889998 to 59412.689065
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.476, mu=-0.005, sig=2.718, offset=0.004
+✓ Fit successful with bounds
+Final fit: center=-0.091, sigma=2.856
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.091 ± 2.856 km/s
+
+Processing individual CCFs...
+✓ All 100 Gaussian fits successful
+
+    RV_gauss values (m/s) for EXPRES:
+    Shape: (100,)
+    Min: -3.164187
+    Max: 3.765304
+    Mean: 0.010582
+    Std: 1.555949
+    Success! DataFrame created with 100 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+  Processing NEID...
+    CCF shape: (61, 60), eMJD range: 59338.779930 to 59411.906241
+
+==================================================
+Estimating template Gaussian center...
+==================================================
+Initial guess: amp=0.466, mu=-0.004, sig=2.718, offset=0.005
+✓ Fit successful with bounds
+Final fit: center=-0.079, sigma=2.943
+Reduced χ² = 0.000
+
+Velocity grid used [-12.00, 12.00]
+Template center: -0.079 ± 2.943 km/s
+
+Processing individual CCFs...
+✓ All 60 Gaussian fits successful
+
+    RV_gauss values (m/s) for NEID:
+    Shape: (60,)
+    Min: -3.338049
+    Max: 3.178284
+    Mean: 0.021347
+    Std: 1.465632
+    Success! DataFrame created with 60 points, 4 modes
+    DataFrame columns: ['emjd_times', 'RV_gauss', 'delta_RV_1', 'delta_RV_2', 'delta_RV_3', 'delta_RV_4', 'eRV_gauss', 'e_delta_RV_1', 'e_delta_RV_2', 'e_delta_RV_3', 'e_delta_RV_4']
+
+Detecting outliers with 3.5-sigma clipping for DS9...
+  Processing HARPSN...
+    Original points: 66
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing HARPS...
+    Original points: 15
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing EXPRES...
+    Original points: 100
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+  Processing NEID...
+    Original points: 60
+    RV outliers: 0
+    Mode outliers: 0
+    Total outliers: 0 (0.0%)
+Creating FIESTA activity plots for DS9...
+Saved: /work2/lbuc/iara/GitHub/ESSP/Figures/FIESTA_figures/DS9_activity_FIESTA.png
+
+Saving .dat files without outliers for DS9...
+  Processing HARPSN...
+    Original: 66 points
+    After outlier removal: 66 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harpsn_fiesta_mode4.dat
+  Processing HARPS...
+    Original: 15 points
+    After outlier removal: 15 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_harps_fiesta_mode4.dat
+  Processing EXPRES...
+    Original: 100 points
+    After outlier removal: 100 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_expres_fiesta_mode4.dat
+  Processing NEID...
+    Original: 60 points
+    After outlier removal: 60 points
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_rv_gauss.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode1.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode2.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode3.dat
+    Saved: /work2/lbuc/iara/GitHub/PyORBIT_examples/ESSP4/data/DS9_neid_fiesta_mode4.dat
+Completed DS9
+
+============================================================
+FIESTA Analysis Complete!
+============================================================

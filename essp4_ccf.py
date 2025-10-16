@@ -327,7 +327,6 @@ class CCFAnalyzer:
             print(f"  Saved: {filename}")
         plt.show()
 
-    
     def extract_inverse_ccf_with_errors(self, files):
         """Extract inverse normalized total CCF and errors from all files"""
         inv_ccfs, errors, v_grids, metadata = [], [], [], []
